@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--	<report id="payment_print_report_id"-->
+<!--				string="Payment Smart"-->
+<!--				model="account.payment"-->
+<!--				report_type="qweb-pdf"-->
+<!--				file="payment_print.payment_print_report_template_id"-->
+<!--				name="payment_print.payment_print_report_template_id"/>-->
+
+     <template id='payment_custom_report' inherit_id='account.report_payment_receipt'>
+		<xpath expr="//t/t/t[2]" position='replace'>
+			<t t-call="payment_print.payment_print_report_template_id" t-lang="lang"/>
+		</xpath>
+	</template>
+
+
+</odoo>

@@ -45,7 +45,7 @@
 							<button name="do_button_print_statement" type="object"
 								string="Print Customer Statement" groups="account.group_account_manager"
 								help="Print Customer Statement" context="{'res_partner_search_mode': 'customer'}"/>
-							<button name="customer_send_mail" type="object"
+							<button name="customer_send_mail" type="object" invisible="1"
 								string="Send Customer Statement" groups="account.group_account_manager"
 								help="Print overdue payments report independent of follow-up line"  context="{'res_partner_search_mode': 'customer'}"/>
 						</div>
@@ -88,7 +88,7 @@
 								string="Print Supplier Statement" groups="account.group_account_manager"
 								help="Print Supplier Statement" context="{'res_partner_search_mode': 'supplier'}"/>
 							
-							<button name="supplier_send_mail" type="object"
+							<button name="supplier_send_mail" type="object" invisible="1"
 								string="Send Supplier Statement" groups="account.group_account_manager"
 								help="Print overdue payments report independent of follow-up line"  context="{'res_partner_search_mode': 'supplier'}"/>
 						</div>

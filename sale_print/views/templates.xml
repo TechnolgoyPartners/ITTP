@@ -1,0 +1,295 @@
+<odoo>
+    <template id="sale.report_saleorder_document">
+        <t t-call="sale_print.custom_bridge_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row mt32 mb32" id="informations" t-if="not doc.partner_id">
+                    <div t-if="doc.client_order_ref" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Your Reference:</strong>
+                        <p class="m-0" t-field="doc.client_order_ref"/>
+                    </div>
+                    <div t-if="doc.date_order and doc.state not in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Order Date:</strong>
+                        <p class="m-0" t-field="doc.date_order"/>
+                    </div>
+                    <div t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Quotation Date:</strong>
+                        <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
+                    </div>
+                    <div t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto col-3 mw-100 mb-2" name="expiration_date">
+                        <strong>Expiration:</strong>
+                        <p class="m-0" t-field="doc.validity_date"/>
+                    </div>
+                    <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Salesperson:</strong>
+                        <p class="m-0" t-field="doc.user_id"/>
+                    </div>
+                </div>
+                <div t-if="not doc.partner_id" class="mt32 ml64 mr4" name="signature">
+                    <div class="offset-8">
+                        <strong>Signature</strong>
+                    </div>
+                    <div class="offset-8">
+                        <img t-att-src="image_data_uri(doc.signature)" style="max-height: 4cm; max-width: 8cm;"/>
+                    </div>
+                    <div class="offset-8 text-center">
+                        <p t-field="doc.signed_by"/>
+                    </div>
+                </div>
+  <!--> ========================================================================================================== -->
+                <br/><br/><br/><br/>
+                <div class="row">
+                    <div class="col-6 text-center" style="text-align:center;direction:ltr;">
+                        <h4 style="text-align:center;"><strong>Reseller Details</strong></h4>
+                        <table class="table" style="border-collapse: collapse;font-size:12px;">
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Company Name</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.name"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Address</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.street"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Country</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.country_id.name"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Contact Person</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Phone</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.phone"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Email Address</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.email"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Website </span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.website"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-6 text-center" style="text-align:center;direction:ltr;">
+                        <h4 style="text-align:center;"><strong>End User Details</strong></h4>
+                        <table class="table" style="border-collapse: collapse;font-size:12px;">
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Company Name</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.name"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Address</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.street"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Country</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.country_id.name"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Contact Person</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Phone</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.phone"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Email Address</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.email"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Website </span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.company_id.website"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                <table style="border-collapse: collapse;direction:ltr;width: 100%; text-align:center;"  class="text-center">
+                    <thead>
+                        <tr style="border: 1px solid black;direction:ltr;font-size: 20px;">
+                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;" name="th_description" class="text-center">
+                                <span>
+                                    #
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;" name="th_description" class="text-center">
+                                <span>
+                                    Description
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;" name="th_quantity" class="text-center">
+                                <span>
+                                    Qty
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;" name="th_priceunit" class="text-center">
+                                <span>
+                                    Unit price
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;" name="th_priceunit" class="text-center">
+                                <span>
+                                    Amount
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-collapse: collapse;direction:ltr;font-size: 15px;">
+                        <t t-set="sr" t-value="0"/>
+                        <t t-foreach="doc.order_line" t-as="line">
+                            <tr style="border: 1px solid black;direction:ltr;">
+                                <t name="account_invoice_line_accountable">
+                                    <t t-set="sr" t-value="sr + 1"/>
+                                    <td class="text-center">
+                                        <span class="text-nowrap" t-esc="sr"/>
+                                    </td>
+                                    <td style="border: 1px solid black;" class="text-center">
+                                        <span t-field="line.product_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;" class="text-center">
+                                        <span t-field="line.product_uom_qty"/>
+                                    </td>
+                                    <td style="border: 1px solid black;" class="text-center">
+                                        <span class="text-nowrap" t-field="line.price_unit"/>
+                                    </td>
+                                    <td style="border: 1px solid black;" class="text-center">
+                                        <span class="text-nowrap" t-field="line.price_subtotal"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <br/>
+                <div class="row">
+                    <div class="col-6 text-center" style="text-align:center;direction:ltr;">
+                    </div>
+                    <div class="col-6 text-center" style="text-align:center;direction:ltr;">
+                        <table class="table" style="border-collapse: collapse;font-size:12px;">
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Subtotal</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.amount_untaxed"/>
+                                </td>
+                            </tr>
+<!--                                <tr style="line-height: 3px;">-->
+<!--                                    <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                        <span>VAT Rate</span>-->
+<!--                                    </td>-->
+<!--                                    <td colspan="4" style="border: 1px solid black;">-->
+<!--&lt;!&ndash;                                        <span t-field="doc.tax_totals_json"/>&ndash;&gt;-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>VAT</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.amount_tax"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Total</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.amount_total"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                <div>
+                    <div class="text-left">
+                        <span> License Contract thru e-email </span><br/>
+                        <span> ALL PRices are in SA. Quoted prices are not valid incase of quantity or product change . </span><br/>
+                        <span> Technology Partners for Trading is not responsible for any Government Charges (Witholding TAX related to the order) </span><br/>
+                        <span> Professional Services. Not include in the quote unless otherwise specified </span><br/>
+                        <span> Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot be cancelled, Returned or Exchanged. </span><br/>
+                        <span> All Order address to Technology Partners For Trading </span><br/>
+                        <span> By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned above. </span><br/>
+                    </div>
+                </div>
+                <br/>
+                <div>
+                    <span>
+                        <span>______________________________</span>  &#160;&#160;&#160;  <span>______________________________</span>  &#160;&#160;&#160;  <span>______________________________</span>  &#160;&#160;&#160; <span>______________________________</span>
+                    </span><br/>
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Prepared By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Approved By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Authorized By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Received By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                </div>
+                <br/>
+                <div class="text-center">
+                    <h3>Thank You for your business</h3>
+                    <h3>If you have any queries about this invoice, please contact ,</h3>
+                    <h3>+966 544720897 , admin@it-tp.com</h3>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,4 +1,21 @@
 <odoo>
+    <template id="purchase_stock.report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//t[@t-if='o.dest_address_id']" position="after">
+            <span></span>
+        </xpath>
+        <xpath expr="//div[@t-if='o.dest_address_id']" position="after">
+            <span></span>
+        </xpath>
+    </template>
+    <template id="purchase_stock.report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//t[@t-if='o.dest_address_id']" position="after">
+            <span></span>
+        </xpath>
+        <xpath expr="//span[@t-field='o.name']/.." position="after">
+            <span></span>
+        </xpath>
+    </template>
+
     <template id="purchase.report_purchaseorder_document">
         <t t-call="purchase_print.custom_bridge_layout_purchase">
         <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
@@ -14,7 +31,6 @@
         </t>
         <div class="page">
             <div class="oe_structure"/>
-            <br/><br/><br/>
             <div class="row">
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
                         <h4 style="text-align:center;"><strong>Reseller Details</strong></h4>
@@ -78,65 +94,119 @@
                         </table>
                     </div>
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
-                        <h4 style="text-align:center;"><strong>End User Details</strong></h4>
-                        <table class="table" style="border-collapse: collapse;font-size:12px;">
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Company Name</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="o.company_id.name"/>
-                                </td>
-                            </tr>
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Address</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="o.company_id.street"/>
-                                </td>
-                            </tr>
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Country</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="o.company_id.country_id.name"/>
-                                </td>
-                            </tr>
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Contact Person</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span />
-                                </td>
-                            </tr>
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Phone</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="o.company_id.phone"/>
-                                </td>
-                            </tr>
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Email Address</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="o.company_id.email"/>
-                                </td>
-                            </tr>
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Website </span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="o.company_id.website"/>
-                                </td>
-                            </tr>
-                        </table>
+                        <h4 style="text-align:center;"><strong>Purchase Order</strong></h4>
+                    <table class="table" style="border-collapse: collapse;font-size:12px;">
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>RFQ</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="o.name"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>SalesMan</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="o.user_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Date</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="o.date_order"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Payment Terms</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="o.payment_term_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Country</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="o.company_id.email"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Currency</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="o.currency_id.name"/>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+<!--                        <h4 style="text-align:center;"><strong>End User Details</strong></h4>-->
+<!--                        <table class="table" style="border-collapse: collapse;font-size:12px;">-->
+<!--                            <tr style="line-height: 3px;">-->
+<!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                    <span>Partner Name</span>-->
+<!--                                </td>-->
+<!--                                <td colspan="4" style="border: 1px solid black;">-->
+<!--                                    <span t-field="o.partner_id.name"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr t-if="o.partner_id.street" style="line-height: 3px;">-->
+<!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                    <span>Address</span>-->
+<!--                                </td>-->
+<!--                                <td colspan="4" style="border: 1px solid black;">-->
+<!--                                    <span t-field="o.partner_id.street"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr t-if="o.partner_id.country_id.name" style="line-height: 3px;">-->
+<!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                    <span>Country</span>-->
+<!--                                </td>-->
+<!--                                <td colspan="4" style="border: 1px solid black;">-->
+<!--                                    <span t-field="o.partner_id.country_id.name"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr t-if="o.partner_id.phone" style="line-height: 3px;">-->
+<!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                    <span>Phone</span>-->
+<!--                                </td>-->
+<!--                                <td colspan="4" style="border: 1px solid black;">-->
+<!--                                    <span t-field="o.partner_id.phone"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr style="line-height: 3px;">-->
+<!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                    <span>Email Address</span>-->
+<!--                                </td>-->
+<!--                                <td colspan="4" style="border: 1px solid black;">-->
+<!--                                    <span t-field="o.company_id.email"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr t-if="o.partner_id.website" style="line-height: 3px;">-->
+<!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                    <span>Website </span>-->
+<!--                                </td>-->
+<!--                                <td colspan="4" style="border: 1px solid black;">-->
+<!--                                    <span t-field="o.partner_id.website"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr t-if="o.partner_id.vat" style="line-height: 3px;">-->
+<!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+<!--                                    <span>VAT Number</span>-->
+<!--                                </td>-->
+<!--                                <td colspan="4" style="border: 1px solid black;">-->
+<!--                                    <span t-field="o.partner_id.vat"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
                     </div>
                 </div>
                 <br/>
@@ -236,6 +306,10 @@
                             </tr>
                         </table>
                     </div>
+                </div>
+                <br/>
+                <div>
+                    <span t-esc="o.notes"/>
                 </div>
                 <br/>
                 <div>

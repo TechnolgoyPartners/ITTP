@@ -4,7 +4,7 @@
         <!--Template header-->
         <template id="purchase_custom_headers_layout">
             <div class="header row">
-                <div class="col-6">
+                <div class="col-12">
                     <div>
                     <img t-if="docs.company_id.logo" t-att-src="'data:image/png;base64,%s' % to_text(docs.company_id.logo)"
                          style="width:60px;height:50px;"/>
@@ -19,59 +19,59 @@
                         <span t-if="docs.company_id.phone" t-field="docs.company_id.phone"/>
                     </div>
                 </div>
-                <div class="col-6">
-                    <h4 style="text-align:center;"><strong>Purchase Order</strong></h4>
-                    <table class="table" style="border-collapse: collapse;font-size:12px;">
-                        <tr style="line-height: 3px;">
-                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>RFQ</span>
-                            </td>
-                            <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.name"/>
-                            </td>
-                        </tr>
-                        <tr style="line-height: 3px;">
-                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>SalesMan</span>
-                            </td>
-                            <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.user_id.name"/>
-                            </td>
-                        </tr>
-                        <tr style="line-height: 3px;">
-                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>Date</span>
-                            </td>
-                            <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.date_order"/>
-                            </td>
-                        </tr>
-                        <tr style="line-height: 3px;">
-                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>Payment Terms</span>
-                            </td>
-                            <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.payment_term_id.name"/>
-                            </td>
-                        </tr>
-                        <tr style="line-height: 3px;">
-                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>Country</span>
-                            </td>
-                            <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.company_id.email"/>
-                            </td>
-                        </tr>
-                        <tr style="line-height: 3px;">
-                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>Currency</span>
-                            </td>
-                            <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.currency_id.name"/>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+<!--                <div class="col-6">-->
+<!--&lt;!&ndash;                    <h4 style="text-align:center;"><strong>Purchase Order</strong></h4>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <table class="table" style="border-collapse: collapse;font-size:12px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="line-height: 3px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>RFQ</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="4" style="border: 1px solid black;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span t-field="o.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="line-height: 3px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>SalesMan</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="4" style="border: 1px solid black;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span t-field="o.user_id.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="line-height: 3px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>Date</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="4" style="border: 1px solid black;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span t-field="o.date_order"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="line-height: 3px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>Payment Terms</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="4" style="border: 1px solid black;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span t-field="o.payment_term_id.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="line-height: 3px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>Country</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="4" style="border: 1px solid black;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span t-field="o.company_id.email"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="line-height: 3px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>Currency</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="4" style="border: 1px solid black;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span t-field="o.currency_id.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </table>&ndash;&gt;-->
+<!--                </div>-->
             </div>
         </template>
         <!--Template footer-->

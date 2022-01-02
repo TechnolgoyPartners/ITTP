@@ -106,42 +106,34 @@
                         <table class="table" style="border-collapse: collapse;font-size:12px;">
                             <tr style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Company Name</span>
+                                    <span>Partner Name</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="doc.company_id.name"/>
+                                    <span t-field="doc.partner_id.name"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.street" style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Address</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="doc.company_id.street"/>
+                                    <span t-field="doc.partner_id.street"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.country_id.name" style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Country</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="doc.company_id.country_id.name"/>
+                                    <span t-field="doc.partner_id.country_id.name"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Contact Person</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <span />
-                                </td>
-                            </tr>
-                            <tr style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.phone" style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Phone</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="doc.company_id.phone"/>
+                                    <span t-field="doc.partner_id.phone"/>
                                 </td>
                             </tr>
                             <tr style="line-height: 3px;">
@@ -152,12 +144,20 @@
                                     <span t-field="doc.company_id.email"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.website" style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Website </span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="doc.company_id.website"/>
+                                    <span t-field="doc.partner_id.website"/>
+                                </td>
+                            </tr>
+                            <tr t-if="doc.partner_id.vat" style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>VAT Number</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="doc.partner_id.vat"/>
                                 </td>
                             </tr>
                         </table>
@@ -166,6 +166,33 @@
                 <br/>
                 <table style="border-collapse: collapse;direction:ltr;width: 100%; text-align:center;"  class="text-center">
                     <thead>
+                        <tr style="border: 1px solid black;direction:ltr;font-size: 20px;">
+                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;" name="th_description" class="text-center">
+                                <span>
+                                    #
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;" name="th_description" class="text-center">
+                                <span>
+                                    الوصف
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;" name="th_quantity" class="text-center">
+                                <span>
+                                    الكمية
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;" name="th_priceunit" class="text-center">
+                                <span>
+                                    السعر
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;" name="th_priceunit" class="text-center">
+                                <span>
+                                    المجموع
+                                </span>
+                            </th>
+                        </tr>
                         <tr style="border: 1px solid black;direction:ltr;font-size: 20px;">
                             <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;" name="th_description" class="text-center">
                                 <span>
@@ -189,7 +216,7 @@
                             </th>
                             <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;" name="th_priceunit" class="text-center">
                                 <span>
-                                    Amount
+                                    subtotal
                                 </span>
                             </th>
                         </tr>
@@ -220,7 +247,6 @@
                         </t>
                     </tbody>
                 </table>
-                <br/>
                 <div class="row">
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
                     </div>
@@ -261,7 +287,6 @@
                         </table>
                     </div>
                 </div>
-                <br/>
                 <div>
                     <div class="text-left">
                         <span> License Contract thru e-email </span><br/>
@@ -273,21 +298,37 @@
                         <span> By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned above. </span><br/>
                     </div>
                 </div>
-                <br/>
                 <div>
-                    <span>
-                        <span>______________________________</span>  &#160;&#160;&#160;  <span>______________________________</span>  &#160;&#160;&#160;  <span>______________________________</span>  &#160;&#160;&#160; <span>______________________________</span>
-                    </span><br/>
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Prepared By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Approved By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Authorized By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span>Received By</span>  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                    <br/>
+                    <table style="width:100%;text-align:center;">
+                        <tr>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Prepared By</span>
+                            </td>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Approved By</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table style="width:100%;text-align:center;">
+                        <tr>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Authorized By</span>
+                            </td>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Received By</span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <br/>
                 <div class="text-center">
-                    <h3>Thank You for your business</h3>
-                    <h3>If you have any queries about this invoice, please contact ,</h3>
-                    <h3>+966 544720897 , admin@it-tp.com</h3>
+                    <span>Thank You for your business</span><br/>
+                    <span>+966 544720897 , admin@it-tp.com</span>
                 </div>
             </div>
         </t>

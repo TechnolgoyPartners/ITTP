@@ -98,7 +98,7 @@
                     <table class="table" style="border-collapse: collapse;font-size:12px;">
                         <tr style="line-height: 3px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>RFQ</span>
+                                <span>P.O Number</span>
                             </td>
                             <td colspan="4" style="border: 1px solid black;">
                                 <span t-field="o.name"/>
@@ -106,10 +106,10 @@
                         </tr>
                         <tr style="line-height: 3px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>SalesMan</span>
+                                <span>Vendor Name</span>
                             </td>
                             <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.user_id.name"/>
+                                <span t-field="o.partner_id.name"/>
                             </td>
                         </tr>
                         <tr style="line-height: 3px;">
@@ -130,18 +130,26 @@
                         </tr>
                         <tr style="line-height: 3px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>Country</span>
+                                <span>Contact Person</span>
                             </td>
                             <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.company_id.email"/>
+                                <span t-field="o.user_id.name"/>
                             </td>
                         </tr>
                         <tr style="line-height: 3px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>Currency</span>
+                                <span>Email</span>
                             </td>
                             <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="o.currency_id.name"/>
+                                <span t-field="o.partner_id.email"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Phone</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="o.partner_id.name"/>
                             </td>
                         </tr>
                     </table>

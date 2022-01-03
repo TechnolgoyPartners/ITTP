@@ -419,7 +419,7 @@
                                             <span class="text-nowrap" t-field="line.l10n_gcc_invoice_tax_amount"/>
                                         </td>
                                         <td style="border: 1px solid black;" class="text-center o_price_total">
-                                            <span class="text-nowrap" t-esc="after_disc - line.l10n_gcc_invoice_tax_amount"/>
+                                            <span class="text-nowrap" t-esc="after_disc + line.l10n_gcc_invoice_tax_amount"/>
                                         </td>
                                     </t>
                                     <t t-if="line.display_type == 'line_section'">

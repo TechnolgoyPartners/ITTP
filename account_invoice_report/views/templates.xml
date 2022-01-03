@@ -575,21 +575,6 @@
 <!--                     dir="rtl"-->
                     <br/>
                     <div>
-                        <div class="text-right">
-                            <strong> <span> NOTE - ملاحظة </span> </strong>
-                        </div>
-                        <div class="text-right">
-                            <span> ملاحظة: ان لم نستقبل اي تعليق او ملاحظة منكم على الفاتورة خلال سبعة ايام من تاريخها فيعتبر هذا تأكيد منكم على صحتها </span><br/>
-                        </div>
-                        <div class="text-right">
-                            <span> واستحقاق السداد كما هو موضح في شروط الدفع المذكورة اعلاه وفي امر الشراء الخاص بكم </span><br/>
-                        </div>
-                        <div class="text-left">
-                            <span> NOTE: If we do not receive any comments on this invoice within seven days from the date the invoice generated, </span><br/>
-                        </div>
-                        <div class="text-left">
-                            <span> it means invoice .is correct and due for payment as per agreed terms mentioned in your PO </span><br/>
-                        </div>
                         <div class="text-center">
                             <strong> <span> Bank Account Details تفاصيل الحساب البنكي </span> </strong>
                         </div>
@@ -611,14 +596,39 @@
                         <div class="text-left">
                             <span> Currency: SAR </span>
                         </div>
-                        <div class="text-left">
-                            <span> PREPARED BY ----------------------------------------------------------------------------------------------------- APPROVED BY </span>
-                        </div>
-                        <div class="text-left">
-                            <span> Mohsin Abbas ----------------------------------------------------------------------------------------- Sahibzada Mohammad Tariq </span>
+
+                        <div>
+                            <br/>
+                            <table style="width:100%;text-align:center;">
+                                <tr>
+                                    <td>
+                                        <span>______________________________</span><br/>
+                                        <span>Prepared By</span>
+                                    </td>
+                                    <td>
+                                        <span>______________________________</span><br/>
+                                        <span>Approved By</span>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="text-center">
                             <span> This Document Generated From The System </span><span> تصدر الیا"من النظام ولا تحتاج إلى توقيع أو ختم </span>
+                        </div>
+                        <div class="text-right">
+                            <strong> <span> NOTE - ملاحظة </span> </strong>
+                        </div>
+                        <div class="text-right">
+                            <span> ملاحظة: ان لم نستقبل اي تعليق او ملاحظة منكم على الفاتورة خلال سبعة ايام من تاريخها فيعتبر هذا تأكيد منكم على صحتها </span><br/>
+                        </div>
+                        <div class="text-right">
+                            <span> واستحقاق السداد كما هو موضح في شروط الدفع المذكورة اعلاه وفي امر الشراء الخاص بكم </span><br/>
+                        </div>
+                        <div class="text-left">
+                            <span> NOTE: If we do not receive any comments on this invoice within seven days from the date the invoice generated, </span><br/>
+                        </div>
+                        <div class="text-left">
+                            <span> it means invoice .is correct and due for payment as per agreed terms mentioned in your PO </span><br/>
                         </div>
 
                     </div>

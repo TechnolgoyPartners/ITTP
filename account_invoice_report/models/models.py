@@ -54,7 +54,7 @@ class Currency(models.Model):
                         amt_word=self.ar_currency_unit_label,
                         )
         if not self.is_zero(amount - integer_value):
-            amount_words += ' ' + _('and') + tools.ustr(' {amt_value} {amt_word}').format(
+            amount_words += ' ' +  tools.ustr(' {amt_value} {amt_word}').format(
                         amt_value=_num2words(fractional_value, lang='ar_001'),
                         amt_word=self.ar_currency_subunit_label,
                         )

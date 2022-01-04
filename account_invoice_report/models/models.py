@@ -1,49 +1,78 @@
 # -*- coding: utf-8 -*-
 
-# -*- coding: utf-8 -*-
+import logging
+import math
+import re
+import time
+import num2word
+from lxml import etree
+from odoo import api, fields, models, tools, _
 
-from odoo import models, fields, api
+_logger = logging.getLogger(__name__)
 
-class TccResCurrency(models.Model):
+try:
+    from num2words import num2words
+except ImportError:
+    _logger.warning("The num2words python library is not installed, amount-to-text features won't be fully available.")
+    num2words = None
+
+CURRENCY_DISPLAY_PATTERN = re.compile(r'(\w+)\s*(?:\((.*)\))?')
+
+
+class Currency(models.Model):
     _inherit = 'res.currency'
 
-    def amount_to_text(self, amount):
+    decimal_places = fields.Integer(compute='_compute_decimal_places', store=True,
+                                    help='Decimal places taken into account for operations on amounts in this currency. It is determined by the rounding factor.')
+    currency_unit_label = fields.Char(string="Currency Unit", help="Currency Unit Name")
+    currency_subunit_label = fields.Char(string="Currency Subunit", help="Currency Subunit Name")
+    rounding = fields.Float(string='Rounding Factor', digits=(12, 6), default=0.01,
+                            help='Amounts in this currency are rounded off to the nearest multiple of the rounding factor.')
+
+    def amount_to_text_ar(self, amount):
         self.ensure_one()
         def _num2words(number, lang):
             try:
                 return num2words(number, lang=lang).title()
             except NotImplementedError:
                 return num2words(number, lang='en').title()
+
         if num2words is None:
             logging.getLogger(__name__).warning("The library 'num2words' is missing, cannot render textual amounts.")
             return ""
+
         formatted = "%.{0}f".format(self.decimal_places) % amount
         parts = formatted.partition('.')
         integer_value = int(parts[0])
         fractional_value = int(parts[2] or 0)
-        lang_code = self.env.context.get('lang') or self.env.user.lang
-        lang = self.env['res.lang'].with_context(active_test=False).search([('code', '=', lang_code)])
-        if lang_code == 'ar_AA':
-            amount_words = tools.ustr('{amt_value} {amt_word}').format(
-                amt_value=_num2words(integer_value, lang=lang.iso_code),
-                amt_word='ريال',
-            )
-            if not self.is_zero(amount - integer_value):
-                amount_words += ' ' + _('and') + tools.ustr(' {amt_value} {amt_word}').format(
-                    amt_value=_num2words(fractional_value, lang=lang.iso_code),
-                    amt_word='هللة',
-                )
-        else:
-            amount_words = tools.ustr('{amt_value} {amt_word}').format(
-                amt_value=_num2words(integer_value, lang=lang.iso_code),
-                amt_word=self.currency_unit_label,
-            )
-            if not self.is_zero(amount - integer_value):
-                amount_words += ' ' + _('and') + tools.ustr(' {amt_value} {amt_word}').format(
-                    amt_value=_num2words(fractional_value, lang=lang.iso_code),
-                    amt_word=self.currency_subunit_label,
-                )
+
+        lang = tools.get_lang(self.env)
+        amount_words = tools.ustr('{amt_value} {amt_word}').format(
+                        amt_value=_num2words(integer_value, lang='ar_001'),
+                        amt_word=self.currency_unit_label,
+                        )
+        if not self.is_zero(amount - integer_value):
+            amount_words += ' ' + _('and') + tools.ustr(' {amt_value} {amt_word}').format(
+                        amt_value=_num2words(fractional_value, lang='ar_001'),
+                        amt_word=self.currency_subunit_label,
+                        )
         return amount_words
+
+    def is_zero(self, amount):
+        """Returns true if ``amount`` is small enough to be treated as
+           zero according to current currency's rounding rules.
+           Warning: ``is_zero(amount1-amount2)`` is not always equivalent to
+           ``compare_amounts(amount1,amount2) == 0``, as the former will round after
+           computing the difference, while the latter will round before, giving
+           different results for e.g. 0.006 and 0.002 at 2 digits precision.
+
+           :param float amount: amount to compare with currency's zero
+
+           With the new API, call it like: ``currency.is_zero(amount)``.
+        """
+        self.ensure_one()
+        return tools.float_is_zero(amount, precision_rounding=self.rounding)
+
 
 class invoice_report(models.Model):
     _inherit = 'account.move'
@@ -56,6 +85,14 @@ class invoice_report(models.Model):
             rec.en_amount_text = rec.currency_id.amount_to_text(rec.amount_total)
 
 
+    ar_amount_text = fields.Char(compute='get_ar_amount_text', store=True)
+
+    @api.depends('amount_total')
+    def get_ar_amount_text(self):
+        for rec in self:
+            rec.ar_amount_text = rec.currency_id.amount_to_text_ar(rec.amount_total)
+
+
 class invoice_line_report(models.Model):
     _inherit = 'account.move.line'
 
@@ -65,7 +102,5 @@ class invoice_line_report(models.Model):
     def calculate_discount_amount(self):
         for rec in self:
             rec.discount_amount = ((rec.quantity * rec.price_unit) * rec.discount) / 100
-
-
 
 

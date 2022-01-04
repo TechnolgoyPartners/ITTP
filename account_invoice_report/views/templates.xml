@@ -455,6 +455,9 @@
                                <td style="border: 1px solid black;" colspan="6" class="text-center">
                                    <span class="text-nowrap">
                                        <span t-field="o.en_amount_text"/>
+                                   </span><br/>
+                                   <span class="text-nowrap">
+                                       <span t-field="o.ar_amount_text"/>
                                    </span>
                                 </td>
                                 <td style="border: 1px solid black;" colspan="3" class="text-center">

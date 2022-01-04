@@ -1,0 +1,13 @@
+<odoo>
+    <record id="view_currency_form_ar" model="ir.ui.view">
+        <field name="name">view_currency_form_ar</field>
+        <field name="model">res.currency</field>
+        <field name="inherit_id" ref="base.view_currency_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_subunit_label']" position="after">
+                <field name="ar_currency_unit_label"/>
+                <field name="ar_currency_subunit_label"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

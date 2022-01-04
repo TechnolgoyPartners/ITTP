@@ -1,5 +1,5 @@
 <odoo>
-      <template id="purchase_stock.report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+    <template id="purchase_stock.report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
         <xpath expr="//t[@t-if='o.dest_address_id']" position="after">
             <span></span>
         </xpath>

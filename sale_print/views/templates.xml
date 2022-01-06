@@ -287,6 +287,7 @@
                         </table>
                     </div>
                 </div>
+                <br/><br/>
                 <div>
                     <div class="text-left">
                         <span> License Contract thru e-email </span><br/>
@@ -298,38 +299,43 @@
                         <span> By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned above. </span><br/>
                     </div>
                 </div>
+<!--                <div>-->
+<!--                    <br/>-->
+<!--                    <table style="width:100%;text-align:center;">-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <span>______________________________</span><br/>-->
+<!--                                <span>Prepared By</span>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <span>______________________________</span><br/>-->
+<!--                                <span>Approved By</span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                    <br/>-->
+<!--                    <table style="width:100%;text-align:center;">-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <span>______________________________</span><br/>-->
+<!--                                <span>Authorized By</span>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <span>______________________________</span><br/>-->
+<!--                                <span>Received By</span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div class="text-center">-->
+<!--                    <span>Thank You for your business</span><br/>-->
+<!--                    <span>+966 544720897 , admin@it-tp.com</span>-->
+<!--                </div>-->
+                <br/><br/>
                 <div>
-                    <br/>
-                    <table style="width:100%;text-align:center;">
-                        <tr>
-                            <td>
-                                <span>______________________________</span><br/>
-                                <span>Prepared By</span>
-                            </td>
-                            <td>
-                                <span>______________________________</span><br/>
-                                <span>Approved By</span>
-                            </td>
-                        </tr>
-                    </table>
-                    <br/>
-                    <table style="width:100%;text-align:center;">
-                        <tr>
-                            <td>
-                                <span>______________________________</span><br/>
-                                <span>Authorized By</span>
-                            </td>
-                            <td>
-                                <span>______________________________</span><br/>
-                                <span>Received By</span>
-                            </td>
-                        </tr>
-                    </table>
+                    <span t-esc="o.notes"/>
                 </div>
-                <div class="text-center">
-                    <span>Thank You for your business</span><br/>
-                    <span>+966 544720897 , admin@it-tp.com</span>
-                </div>
+
             </div>
         </t>
     </template>

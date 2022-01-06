@@ -315,11 +315,15 @@
                         </table>
                     </div>
                 </div>
-                <br/><br/><br/>
+                <br/>
+                <div>
+                    <span t-esc="o.notes"/>
+                </div>
+                <br/>
                 <div>
                     <div class="text-left">
                         <span> License Contract thru e-email </span><br/>
-                        <span> ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change . </span><br/>
+                        <span> ALL PRices are in SA. Quoted prices are not valid incase of quantity or product change . </span><br/>
                         <span> Technology Partners for Trading is not responsible for any Government Charges (Witholding TAX related to the order) </span><br/>
                         <span> Professional Services. Not include in the quote unless otherwise specified </span><br/>
                         <span> Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot be cancelled, Returned or Exchanged. </span><br/>
@@ -327,41 +331,38 @@
                         <span> By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned above. </span><br/>
                     </div>
                 </div>
-<!--                <div>-->
-<!--                    <br/>-->
-<!--                    <table style="width:100%;text-align:center;">-->
-<!--                        <tr>-->
-<!--                            <td>-->
-<!--                                <span>______________________________</span><br/>-->
-<!--                                <span>Prepared By</span>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <span>______________________________</span><br/>-->
-<!--                                <span>Approved By</span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-<!--                    <br/>-->
-<!--                    <table style="width:100%;text-align:center;">-->
-<!--                        <tr>-->
-<!--                            <td>-->
-<!--                                <span>______________________________</span><br/>-->
-<!--                                <span>Authorized By</span>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <span>______________________________</span><br/>-->
-<!--                                <span>Received By</span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!--                <div class="text-center">-->
-<!--                    <span>Thank You for your business</span><br/>-->
-<!--                    <span>+966 544720897 , admin@it-tp.com</span>-->
-<!--                </div>-->
-                <br/><br/><br/>
+                <br/>
                 <div>
-                    <span t-esc="o.notes"/>
+                    <br/>
+                    <table style="width:100%;text-align:center;">
+                        <tr>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Prepared By</span>
+                            </td>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Approved By</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table style="width:100%;text-align:center;">
+                        <tr>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Authorized By</span>
+                            </td>
+                            <td>
+                                <span>______________________________</span><br/>
+                                <span>Received By</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <span>Thank You for your business</span><br/>
+                    <span>+966 544720897 , admin@it-tp.com</span>
                 </div>
 
 

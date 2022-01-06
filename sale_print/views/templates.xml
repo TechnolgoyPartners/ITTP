@@ -333,7 +333,7 @@
 <!--                </div>-->
                 <br/><br/>
                 <div>
-                    <span t-esc="o.notes"/>
+                    <span t-esc="doc.note"/>
                 </div>
 
             </div>

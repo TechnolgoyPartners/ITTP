@@ -141,7 +141,7 @@
                                     <span>Email Address</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="doc.company_id.email"/>
+                                    <span t-field="doc.partner_id.email"/>
                                 </td>
                             </tr>
                             <tr t-if="doc.partner_id.website" style="line-height: 3px;">

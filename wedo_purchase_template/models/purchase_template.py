@@ -16,7 +16,7 @@ class PurchaseOrderTemplate(models.Model):
     name = fields.Char(required=True)
     vendor_ids = fields.Many2many('res.partner', string='Vendors')
     po_template_line_ids = fields.One2many('purchase.order.template.line', 'po_template_id', string='Lines', copy=True)
-    note = fields.Text('Terms and conditions', translate=True)
+    note = fields.Html('Terms and conditions', translate=True)
     active = fields.Boolean('Active', default=True)
 
 

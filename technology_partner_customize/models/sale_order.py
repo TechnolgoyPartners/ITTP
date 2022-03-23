@@ -14,6 +14,8 @@ class SaleOrderLine(models.Model):
     partner_id = fields.Many2one(comodel_name="res.partner", string="Vendor", required=False, )
     serial_number = fields.Char(string="Serial Number", required=False, )
 
+    product_serial = fields.Char(string="Product Serial", related='product_id.barcode', )
+
     def _purchase_service_create(self, quantity=False):
         """ On Sales Order confirmation, some lines (services ones) can create a purchase order line and maybe a purchase order.
             If a line should create a RFQ, it will check for existing PO. If no one is find, the SO line will create one, then adds
@@ -32,12 +34,16 @@ class SaleOrderLine(models.Model):
             else:
                 suppliers = line.product_id._select_seller(quantity=line.product_uom_qty,
                                                            uom_id=line.product_uom)
-            if not suppliers:
+            if suppliers:
+                supplierinfo = suppliers[0]
+            else:
+                supplierinfo = self.env['product.supplierinfo'].search([('name', '=', line.partner_id.id)], limit=1)
+
+            if not supplierinfo:
                 raise UserError(
                     _("There is no vendor associated to the product %s. Please define a vendor for this product.") % (
                         line.product_id.display_name,))
-            supplierinfo = suppliers[0]
-            partner_supplier = supplierinfo.name  # yes, this field is not explicit .... it is a res.partner !
+            partner_supplier = supplierinfo.name  # yes, this field is not explicit ....
 
             # determine (or create) PO
             purchase_order = supplier_po_map.get(partner_supplier.id)

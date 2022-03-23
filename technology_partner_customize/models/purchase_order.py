@@ -8,6 +8,8 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     serial_number = fields.Char(string="Serial Number", required=False, )
+    product_serial = fields.Char(string="Product Serial", related='product_id.barcode', )
+
 
     def _prepare_account_move_line(self, move=False):
         res = super(PurchaseOrderLine, self)._prepare_account_move_line(move)

@@ -8,3 +8,4 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     serial_number = fields.Char(string="Serial Number", required=False, )
+    product_serial = fields.Char(string="Product Serial", related='product_id.barcode', )

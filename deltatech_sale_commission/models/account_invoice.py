@@ -6,6 +6,12 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
+class AccountInvoice(models.Model):
+    _inherit = "account.move"
+
+    is_comm_created = fields.Boolean(string="Commission Created", )
+
+
 class AccountInvoiceLine(models.Model):
     _inherit = "account.move.line"
 
@@ -95,8 +101,8 @@ class AccountInvoiceLine(models.Model):
                 if not self.env["res.users"].has_group("deltatech_sale_margin.group_sale_below_purchase_price"):
                     date_eval = invoice_line.move_id.invoice_date or fields.Date.context_today(invoice_line)
                     if (
-                        invoice_line.move_id.currency_id
-                        and invoice_line.move_id.currency_id.id != self.env.user.company_id.currency_id.id
+                            invoice_line.move_id.currency_id
+                            and invoice_line.move_id.currency_id.id != self.env.user.company_id.currency_id.id
                     ):
                         from_currency = invoice_line.move_id.currency_id.with_context(date=date_eval)
                         price_unit = from_currency.compute(

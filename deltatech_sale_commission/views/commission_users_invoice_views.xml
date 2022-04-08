@@ -17,10 +17,13 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="user_id" option="{'no_create': True}"/>
-                                <field name="date"/>
+                                <field name="user_id" option="{'no_create': True}"
+                                       attrs="{'readonly':[('state', '=', 'done')]}"/>
+                                <field name="date" attrs="{'readonly':[('state', '=', 'done')]}"/>
                             </group>
                             <group>
+                                <field name="from_date" attrs="{'readonly':[('state', '=', 'done')]}"/>
+                                <field name="to_date" attrs="{'readonly':[('state', '=', 'done')]}"/>
                                 <field name="total_commission" readonly="1"/>
                             </group>
                         </group>
@@ -40,6 +43,8 @@
             <field name="arch" type="xml">
                 <tree string="Commission Invoice">
                     <field name="user_id"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
                     <field name="total_commission"/>
                 </tree>
             </field>

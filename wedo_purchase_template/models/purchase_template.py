@@ -71,19 +71,7 @@ class PurchaseOrder(models.Model):
     def onchange_po_template_id(self):
         if not self.po_template_id:
             return
-        self.order_line = False
         vals = {
-            'order_line': [(0, 0, {'name': g.name,
-                                   'sequence': g.sequence,
-                                   'product_id': g.product_id.id,
-                                   'product_qty': g.product_qty,
-                                   'product_uom_qty': g.product_qty,
-                                   'product_uom': g.product_uom_id.id,
-                                   'product_uom_category_id': g.product_uom_category_id.id,
-                                   'display_type': g.display_type, })
-                           for g in self.po_template_id.po_template_line_ids],
             'notes': self.po_template_id.note,
         }
         self.write(vals)
-        for line in self.order_line:
-            line._onchange_quantity()

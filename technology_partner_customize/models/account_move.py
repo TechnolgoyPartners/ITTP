@@ -4,6 +4,12 @@ from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tools import float_is_zero, float_compare
 
 
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+
+    sale_reference = fields.Char(string="Reference", required=False, )
+
+
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 

@@ -16,6 +16,7 @@
         "report/sale_margin_report.xml",
         "views/commission_users_view.xml",
         "views/commission_users_invoice_views.xml",
+        "views/user_commission_views.xml",
         "wizard/commission_compute_view.xml",
         "wizard/update_purchase_price_view.xml",
     ],

@@ -4,3 +4,5 @@ access_commission_users,access_commission_users,model_commission_users,sales_tea
 access_commission_compute,access_commission_compute,model_commission_compute,base.group_user,1,1,1,1
 access_commission_update_purchase_price,access_commission_update_purchase_price,model_commission_update_purchase_price,base.group_user,1,1,1,1
 access_commission_users_invoice,commission.users.invoice,model_commission_users_invoice,base.group_user,1,1,1,1
+access_user.commission,user.commission,model_user_commission,base.group_user,1,1,1,1
+access_user+_commission_line,user.commission.line,model_user_commission_line,base.group_user,1,1,1,1

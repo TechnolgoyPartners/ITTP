@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <tree string="Users Commission" editable="top">
                     <field name="user_id"/>
+                    <field name="commission_id"/>
                     <field name="rate"/>
-                    <field name="target"/>
                 </tree>
             </field>
         </record>

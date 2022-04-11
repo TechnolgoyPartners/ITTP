@@ -27,7 +27,6 @@ class CommissionUserInvoice(models.Model):
     def search_user_commission(self):
         self.invoice_ids = False
         self.total_commission = False
-        target = self.env['commission.users'].search([('user_id', '=', self.user_id.id)], limit=1).target
         domain = [
             ('user_id', '=', self.user_id.id),
             ('invoice_id.is_comm_created', '=', False)
@@ -37,14 +36,10 @@ class CommissionUserInvoice(models.Model):
 
         if self.to_date:
             domain.append(('date', '<=', self.to_date))
-        print(domain)
         records = self.env['sale.margin.report'].search(domain)
-        print(records)
         if records:
-            total_sales = sum(records.mapped('profit_val'))
-            if total_sales > target:
-                self.invoice_ids = records.mapped('invoice_id').ids
-                self.total_commission = sum(records.mapped('commission_computed'))
+            self.invoice_ids = records.mapped('invoice_id').ids
+            self.total_commission = sum(records.mapped('commission_computed'))
         return records
 
     def action_done(self):

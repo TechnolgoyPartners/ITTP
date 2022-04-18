@@ -12,4 +12,10 @@ class Product(models.Model):
 
     service_to_purchase = fields.Boolean(default=True)
 
-    barcode = fields.Char(string="Product Serial", )
+    barcode = fields.Char(string="Product Number", )
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    barcode = fields.Char(string="Product Number", )

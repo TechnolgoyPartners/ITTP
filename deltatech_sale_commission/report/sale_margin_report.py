@@ -19,9 +19,9 @@ class SaleMarginReport(models.Model):
     # 'purchase_price = fields.float('Purchase price', readonly=True )
     sale_val = fields.Monetary("Sale value", readonly=True, help="Sale value in company currency")
 
-    stock_val = fields.Monetary("Stock value", readonly=True, help="Stock value in company currency")
+    stock_val = fields.Monetary("Purchase value", readonly=True, help="Stock value in company currency")
     profit_val = fields.Monetary("Profit", readonly=True, help="Profit obtained at invoicing in company currency")
-    commission_computed = fields.Float("Commission Computed", readonly=True)
+    commission_computed = fields.Float("Commission", readonly=True)
     commission_manager_computed = fields.Float("Commission Manager Computed", readonly=True)
     commission = fields.Float("Commission")
     partner_id = fields.Many2one("res.partner", "Partner", readonly=True)

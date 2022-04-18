@@ -10,7 +10,7 @@ class AccountGroup(models.Model):
     group_child_ids = fields.One2many(
         comodel_name="account.group", inverse_name="parent_id", string="Child Groups"
     )
-    level = fields.Integer(string="Level", compute="_compute_level")
+    level = fields.Integer(compute="_compute_level", recursive=True)
     account_ids = fields.One2many(
         comodel_name="account.account", inverse_name="group_id", string="Accounts"
     )
@@ -20,12 +20,16 @@ class AccountGroup(models.Model):
         string="Compute accounts",
         store=True,
     )
-    complete_name = fields.Char("Full Name", compute="_compute_complete_name")
-    complete_code = fields.Char("Full Code", compute="_compute_complete_code")
+    complete_name = fields.Char(
+        "Full Name", compute="_compute_complete_name", recursive=True
+    )
+    complete_code = fields.Char(
+        "Full Code", compute="_compute_complete_code", recursive=True
+    )
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
-        """ Forms complete name of location from parent location to child location. """
+        """Forms complete name of location from parent location to child location."""
         if self.parent_id.complete_name:
             self.complete_name = "{}/{}".format(self.parent_id.complete_name, self.name)
         else:
@@ -33,7 +37,7 @@ class AccountGroup(models.Model):
 
     @api.depends("code_prefix_start", "parent_id.complete_code")
     def _compute_complete_code(self):
-        """ Forms complete code of location from parent location to child location. """
+        """Forms complete code of location from parent location to child location."""
         if self.parent_id.complete_code:
             self.complete_code = "{}/{}".format(
                 self.parent_id.complete_code, self.code_prefix_start

@@ -24,7 +24,7 @@ class CommissionUsers(models.Model):
 
     commission_id = fields.Many2one(comodel_name="user.commission", string="Commission", required=False, )
 
-    @api.depends('commission_id')
+    @api.depends('commission_id', 'commission_id.line_ids')
     def _compute_commission_rate(self):
         for rec in self:
             if rec.commission_id:

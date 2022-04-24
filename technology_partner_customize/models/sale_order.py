@@ -81,6 +81,7 @@ class SaleOrderLine(models.Model):
     def _prepare_invoice_line(self, **optional_values):
         res = super(SaleOrderLine, self)._prepare_invoice_line(**optional_values)
         res.update({
-            'serial_number': self.serial_number
+            'serial_number': self.serial_number,
+            'purchase_cost': sum(self.purchase_line_ids.mapped('price_unit')),
         })
         return res

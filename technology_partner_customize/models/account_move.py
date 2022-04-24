@@ -15,3 +15,5 @@ class AccountMoveLine(models.Model):
 
     serial_number = fields.Char(string="Serial Number", required=False, )
     product_serial = fields.Char(string="Product Serial", related='product_id.barcode', )
+
+    purchase_cost = fields.Float(string="Purchase Cost", required=False, )

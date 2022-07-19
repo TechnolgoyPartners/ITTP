@@ -8,14 +8,14 @@
 #
 ##############################################################################
 {
-    'name': "Technology Partners Customization",
+    'name': "Multiple Purchase",
 
     'summary': """
-        This App will Customize Some Details to Technology Partners Company.
+        This Module Allowed User to create Purchase Order from Sale Order.
         """,
 
     'description': """
-       This App will Customize Some Details to Technology Partners Company.
+       This Module Allowed User to create Purchase Order from Sale Order.
     """,
 
     'author': "Abdullah Elyamani",
@@ -24,18 +24,16 @@
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Sale',
+    'category': 'Sales',
     'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale_purchase'],
+    'depends': ['sale', 'purchase', 'multiple_quotation_handler'],
 
     # always loaded
     'data': [
         'views/sale_order_views.xml',
         'views/purchase_order_views.xml',
-        'views/account_move_views.xml',
-        # 'views/product_supplierinfo_views.xml',
     ],
 
     'license': 'AGPL-3',

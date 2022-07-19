@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_multi_quotation_selector" model="ir.ui.view">
+            <field name="name">Quotation Selector</field>
+            <field name="model">multi.quotations.selector</field>
+            <field name="arch" type="xml">
+                <form string="Quotation Selector">
+                    <p class="oe_grey">
+                        Quotations will be created in draft so that you can review
+                        them and choose the right one.
+                    </p>
+                    <group>
+                        <field name="best_quotation" required="1" options="{'no_create': True}" domain="[('multi_order_id', '=', order_id)]"/>
+                        <field name="order_id" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="set_quotation" string="Set the Quotation" type="object"
+                            class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_multi_quotation_selector" model="ir.actions.act_window">
+            <field name="name">Quotation Selector</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">multi.quotations.selector</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="groups_id" eval="[(4,ref('sales_team.group_sale_salesman'))]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Email template -->
+        <record id="email_template_multi_quotation" model="mail.template">
+            <field name="name">Multiple Quotations - Send by Email</field>
+            <field name="email_from">
+                {{(object.user_id.email and '&quot;%s&quot; &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or
+                '')}}
+            </field>
+            <field name="subject">{{object.company_id.name}} {{ object.state in ('draft', 'sent') and 'Quotation' or
+                'Order' }} (Ref {{object.name or 'n/a' }})
+            </field>
+            <field name="partner_to">{{object.partner_id.id}}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="sale.action_report_saleorder"/>
+            <field name="report_name">
+                {{(object.name or '').replace('/','_')}} {{object.state == 'draft' and '_draft' or ''}}
+            </field>
+            <field name="lang">{{object.partner_id.lang}}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        <t t-set="doc_name" t-value="'quotation' if object.state in ('draft', 'sent') else 'order'"/>
+                        Dear <t t-out="object.partner_id.name or ''"></t>,
+                        <br/>
+                        <br/>
+                        Your quotations is ready for review.
+                        <br/>
+                        <br/>
+                        Do not hesitate to contact us if you have any questions.
+                        <br/>
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="sale.action_report_saleorder"/>
+            <field name="report_name">{{ (object.name or '').replace('/','_') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>
+        <!--{% for row in mydata %}-->

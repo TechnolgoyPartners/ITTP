@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_multiple_quotation_order,multi.quotations,model_multi_quotations,sales_team.group_sale_salesman,1,1,1,1
+access_multiple_quotation_order_line,multi.quotations.line,model_multi_quotation_line,sales_team.group_sale_salesman,1,1,1,1
+access_multiple_quotation_order_manager,multi.quotations,model_multi_quotations,sales_team.group_sale_manager,1,1,1,1
+access_multiple_quotation_order_line_manager,multi.quotation.line,model_multi_quotation_line,sales_team.group_sale_manager,1,1,1,1
+access_multi_quotations_selector,multi.quotations.selector,model_multi_quotations_selector,sales_team.group_sale_manager,1,1,1,1
+
+access_multiple_quotation_order_portal,multi.quotations,model_multi_quotations,base.group_portal,1,0,0,0
+access_multiple_quotation_order_line_portal,multi.quotation.line,model_multi_quotation_line,base.group_portal,1,0,0,0

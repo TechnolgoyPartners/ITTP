@@ -28,7 +28,7 @@
     'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale', 'purchase', 'multiple_quotation_handler'],
+    'depends': ['sale', 'purchase', 'multiple_quotation_handler', 'technology_partner_customize'],
 
     # always loaded
     'data': [

@@ -101,3 +101,14 @@ class SaleOrderLine(models.Model):
         for rec in self:
             if rec.product_id.seller_ids:
                 rec.partner_ids = rec.product_id.seller_ids.mapped('name').ids
+
+    def _prepare_invoice_line(self, **optional_values):
+        res = super(SaleOrderLine, self)._prepare_invoice_line(**optional_values)
+        purchase_records = self.env['purchase.order.line'].search([
+            ('product_id', '=', self.product_id.id),
+            ('order_id.sale_order_id', '=', self.order_id.id),
+        ])
+        res.update({
+            'purchase_cost': sum(purchase_records.mapped('price_unit')),
+        })
+        return res

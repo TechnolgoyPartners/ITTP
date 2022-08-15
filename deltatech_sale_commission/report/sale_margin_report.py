@@ -73,7 +73,7 @@ class SaleMarginReport(models.Model):
                 END  AS indicator_profit,
 
 
-                sub.rate * (sale_val  - stock_val ) as commission_computed,
+                (sub.rate * (sale_val  - stock_val ) / 100) as commission_computed,
                 sub.manager_rate * (sale_val    - stock_val )  as commission_manager_computed,
                 commission,
                 partner_id, commercial_partner_id, user_id, manager_user_id,     sub.company_id,

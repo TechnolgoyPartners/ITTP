@@ -28,7 +28,7 @@
     'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale_purchase'],
+    'depends': ['sale_purchase', 'sale_management', 'purchase', 'account_accountant'],
 
     # always loaded
     'data': [

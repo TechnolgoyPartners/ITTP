@@ -41,6 +41,15 @@
                                 <span t-field="doc.user_id.name"/>
                             </td>
                         </tr>
+
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>SalesMan Email</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.user_id.work_email"/>
+                            </td>
+                        </tr>
                         <tr style="line-height: 3px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Date</span>

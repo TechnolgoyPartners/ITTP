@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+
+
+        <record id="quotation_template_custom_action" model="ir.actions.act_window">
+            <field name="name">Quotation Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">quotation.template.custom</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Templates found. Let's create one!
+                </p>
+                <p>
+                    Templates are perfect for organizing your Quotations ....
+                </p>
+            </field>
+        </record>
+
+
+        <record id="quotation_template_custom_view_tree" model="ir.ui.view">
+            <field name="name">quotation.template.custom.view.tree</field>
+            <field name="model">quotation.template.custom</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Tag" sample="1" multi_edit="1">
+                    <field name="name"/>
+                    <field name="note"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="quotation_template_custom_view_form" model="ir.ui.view">
+            <field name="name">quotation.template.custom.view.form</field>
+            <field name="model">quotation.template.custom</field>
+            <field name="arch" type="xml">
+                <form string="Tags">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="quotation_template_custom_menuitem"
+                  name="Quotation Template"
+                  action="quotation_template_custom_action"
+                  parent="sale.menu_sale_config"
+                  sequence="3"/>
+
+        <delete model="ir.ui.menu" id="sale_management.sale_order_template_menu"></delete>
+
+    </data>
+</odoo>

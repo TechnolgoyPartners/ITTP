@@ -12,14 +12,18 @@
                     <field name="origin"/>
                 </xpath>
 
-                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                    <field name="seq"/>
                     <field name="product_serial"/>
                 </xpath>
 
-
-                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
-                    <field name="serial_number"/>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="replace">
+                    <field name="description"/>
                 </xpath>
+
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">-->
+<!--                    <field name="serial_number"/>-->
+<!--                </xpath>-->
 
             </field>
         </record>

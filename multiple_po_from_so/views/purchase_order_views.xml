@@ -10,6 +10,7 @@
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="sale_order_id" readonly="1"/>
                     <field name="sale_customer_id"/>
+                    <field name="is_customer"/>
                 </xpath>
                 <xpath expr="//field[@name='origin']" position="attributes">
                     <attribute name="string">Quotation Ref</attribute>

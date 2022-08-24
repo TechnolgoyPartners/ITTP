@@ -10,6 +10,23 @@ class PurchaseOrderLine(models.Model):
     serial_number = fields.Char(string="Serial Number", required=False, )
     product_serial = fields.Char(string="Product Number", related='product_id.barcode', )
 
+    description = fields.Char(
+        string='Description',
+        readonly=False)
+
+    seq = fields.Integer(
+        string='Seq', default=0,
+        compute='_compute_seq_number',
+        required=False)
+
+    # @api.depends('product_id')
+    def _compute_seq_number(self):
+        start = 1
+        for rec in self:
+            rec.seq = start
+            start += 1
+
+
     def _prepare_account_move_line(self, move=False):
         res = super(PurchaseOrderLine, self)._prepare_account_move_line(move)
         res.update({

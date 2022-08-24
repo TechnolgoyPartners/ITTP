@@ -14,7 +14,23 @@ class SaleOrderLine(models.Model):
     partner_id = fields.Many2one(comodel_name="res.partner", string="Vendor", required=False, )
     serial_number = fields.Char(string="Serial Number", required=False, )
 
-    product_serial = fields.Char(string="Product Number", related='product_id.barcode', )
+    product_serial = fields.Char(string="Product Number", )
+
+    description = fields.Char(
+        string='Description',
+        readonly=False)
+
+    seq = fields.Integer(
+        string='Seq', default=0,
+        compute='_compute_seq_number',
+        required=False)
+
+    # @api.depends('product_id')
+    def _compute_seq_number(self):
+        start = 1
+        for rec in self:
+            rec.seq = start
+            start +=1
 
     # def _purchase_service_create(self, quantity=False):
     #     """ On Sales Order confirmation, some lines (services ones) can create a purchase order line and maybe a purchase order.

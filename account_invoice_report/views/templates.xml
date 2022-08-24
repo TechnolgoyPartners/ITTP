@@ -49,8 +49,26 @@
                         phone :
                         <span t-esc="o.partner_id.phone"/>
                         <br/>
+                        Email :
+                        <t t-if="o.partner_id.child_ids">
+                            <span t-esc="o.partner_id.child_ids[0].email"/>
+                        </t>
+                        <br/>
                         Vat :
                         <span t-esc="o.partner_id.vat"/>
+                        <br/>
+                        Customer Reference :
+                        <span t-esc="o.sale_reference"/>
+                        <br/>
+                        Contact Person :
+                        <t t-if="o.partner_id.child_ids">
+                            <span t-esc="o.partner_id.child_ids[0].name"/>
+                        </t>
+                        <br/>
+                        Bank Account :
+                        <t t-if="o.partner_id.bank_ids">
+                            <span t-esc="o.partner_id.bank_ids[0].bank_id.name + ' ' + o.partner_id.bank_ids[0].acc_number"/>
+                        </t>
                         <br/>
                     </p>
                 </div>
@@ -130,8 +148,8 @@
             <div class="page">
                 <br/>
                 <br/>
-                <br/>
                 <h3>
+                    <br/>
                     <div class="row">
                         <div class="col-4" style="text-align:left">
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">
@@ -541,7 +559,8 @@
                         </td>
                     </tr>
                 </table>
-
+                <strong>Notes :</strong>
+                <span class="text-nowrap" t-field="o.note"/>
 
                 <!--                    <p t-if="o.invoice_payment_term_id" name="payment_term">-->
                 <!--                        <div class="row">-->
@@ -601,24 +620,20 @@
                     <span>ملاحظة: ان لم نستقبل اي تعليق او ملاحظة منكم على الفاتورة خلال سبعة ايام من تاريخها فيعتبر هذا
                         تأكيد منكم على صحتها
                     </span>
-                    <br/>
                 </div>
                 <div class="text-right">
                     <span>واستحقاق السداد كما هو موضح في شروط الدفع المذكورة اعلاه وفي امر الشراء الخاص بكم</span>
-                    <br/>
                 </div>
                 <div class="text-left">
                     <span>NOTE: If we do not receive any comments on this invoice within seven days from the date the
                         invoice generated,
                     </span>
-                    <br/>
                 </div>
                 <div class="text-left">
                     <span>it means invoice .is correct and due for payment as per agreed terms mentioned in your PO
                     </span>
-                    <br/>
                 </div>
-                <br/>
+
                 <div>
                     <div class="text-center">
                         <strong>
@@ -638,10 +653,8 @@
                         <span>Swift :RJHISARI</span>
                     </div>
                     <div class="text-left">
-                        <span>IBAN: SA0680000446608010236927</span>
-                    </div>
-                    <div class="text-left">
-                        <span>Currency: SAR</span>
+                        <span style="float:left;">IBAN: SA0680000446608010236927</span>
+                        <span style="float:right;">Currency: SAR</span>
                     </div>
 
                     <div>
@@ -650,12 +663,10 @@
                             <tr>
                                 <td>
                                     <span>______________________________</span>
-                                    <br/>
                                     <span>Prepared By</span>
                                 </td>
                                 <td>
                                     <span>______________________________</span>
-                                    <br/>
                                     <span>Approved By</span>
                                 </td>
                             </tr>
@@ -665,8 +676,18 @@
                         <span>This Document Generated From The System</span>
                         <span>تصدر الیا"من النظام ولا تحتاج إلى توقيع أو ختم</span>
                     </div>
+                    <div style="text-align:center;">
+                        <img style="max-height:250px;text-align:center;"
+                             src="/account_invoice_report/static/description/stamp.jpeg"/>
 
-
+                        <t t-if="o.is_first_print">
+                            <t t-set="o.is_first_print" t-value="False"/>
+                            <span>الفاتورة الاصليه</span>
+                        </t>
+                        <t t-if="not o.is_first_print">
+                            <span>الفاتورة نسخه طبق الاصل</span>
+                        </t>
+                    </div>
                 </div>
             </div>
         </t>

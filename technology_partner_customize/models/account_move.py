@@ -7,7 +7,7 @@ from odoo.tools import float_is_zero, float_compare
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    sale_reference = fields.Char(string="Reference", required=False, )
+    sale_reference = fields.Char(string="Customer Reference", )
 
 
 class AccountMoveLine(models.Model):

@@ -110,6 +110,19 @@ class invoice_report(models.Model):
 
     en_amount_text = fields.Char(compute='get_en_amount_text', store=True)
 
+    note = fields.Text(
+        string="Note",
+        required=False)
+
+    is_first_print = fields.Boolean(
+        string='Is_first_print',
+        required=False, default=True)
+
+    def action_print_invoice_inherited(self):
+        print('hi from invoices')
+        self.is_first_print = False
+        return self.env.ref('account.account_invoices').report_action(self)
+
     @api.depends('currency_id','amount_total')
     def get_en_amount_text(self):
         for rec in self:

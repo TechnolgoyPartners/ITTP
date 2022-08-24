@@ -9,7 +9,8 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//group[@id='header_right_group']" position="inside">
-                    <field name="sale_reference" attrs="{'invisible': [('move_type', '!=', 'out_invoice')]}"/>
+                    <field name="sale_reference" attrs="{'invisible': [('move_type', '!=', 'out_invoice')], 'required': [('move_type', '=', 'out_invoice')]}"/>
+                    <field name="is_first_print" invisible="1"/>
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">

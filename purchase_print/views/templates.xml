@@ -68,7 +68,7 @@
                                     <span>Contact Person</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <t t-if="o.company_id.partner_id.child_ids[0]">
+                                    <t t-if="o.company_id.partner_id.child_ids">
                                         <span t-field="o.company_id.partner_id.child_ids[0].name"/>
                                     </t>
                                 </td>
@@ -141,7 +141,7 @@
                                     <span>Contact Person</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <t t-if="o.partner_id.child_ids[0]">
+                                    <t t-if="o.partner_id.child_ids">
                                         <span t-field="o.partner_id.child_ids[0].name"/>
                                     </t>
                                 </td>

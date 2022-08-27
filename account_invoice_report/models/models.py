@@ -115,13 +115,30 @@ class invoice_report(models.Model):
         required=False)
 
     is_first_print = fields.Boolean(
-        string='Is_first_print',
+        string='Is_first_print',compute='_compute_is_first_print',
         required=False, default=True)
+    
+    print_count = fields.Integer(
+        string='Print_count', readonly=True,
+        default=0)
 
     def action_print_invoice_inherited(self):
         print('hi from invoices')
-        self.is_first_print = False
-        return self.env.ref('account.account_invoices').report_action(self)
+        print('asdas', self.is_first_print)
+        self.print_count += 1
+        result = self.env.ref('account.account_invoices').report_action(self)
+        # self.is_first_print = False
+        return result
+
+    @api.depends('print_count')
+    def _compute_is_first_print(self):
+        print('compute is first print')
+        for rec in self:
+            if rec.print_count > 1:
+                rec.is_first_print = False
+            else:
+                rec.is_first_print = True
+        print(self.is_first_print)
 
     @api.depends('currency_id','amount_total')
     def get_en_amount_text(self):

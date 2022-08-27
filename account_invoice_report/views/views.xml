@@ -21,6 +21,7 @@
             <xpath expr="//field[@name='payment_reference']" position="after">
                 <!-- Add your fields or attributes here -->
                 <field name="note"/>
+                <field name="print_count" invisible="1" />
             </xpath>
             <xpath expr="//button[@name='action_register_payment']" position="after">
                 <!-- Add your fields or attributes here -->

@@ -677,14 +677,14 @@
                         <span>تصدر الیا"من النظام ولا تحتاج إلى توقيع أو ختم</span>
                     </div>
                     <div style="text-align:center;">
-                        <img style="max-height:250px;text-align:center;"
+                        <img style="max-height:150px;text-align:center;"
                              src="/account_invoice_report/static/description/stamp.jpeg"/>
 
-                        <t t-if="o.is_first_print">
-                            <t t-set="o.is_first_print" t-value="False"/>
+                        <t t-if="o.is_first_print == True">
+                            <t t-set="o.is_first_print = False" />
                             <span>الفاتورة الاصليه</span>
                         </t>
-                        <t t-if="not o.is_first_print">
+                        <t t-if="o.is_first_print == False">
                             <span>الفاتورة نسخه طبق الاصل</span>
                         </t>
                     </div>

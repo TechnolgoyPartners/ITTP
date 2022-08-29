@@ -1,6 +1,100 @@
 <odoo>
     <template id="sale.report_saleorder_document">
-        <t t-call="sale_print.custom_bridge_layout">
+<!--        <t t-call="sale_print.custom_bridge_layout">-->
+        <t t-call="web.internal_layout">
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <img t-if="docs.company_id.logo"
+                             t-att-src="'data:image/png;base64,%s' % to_text(docs.company_id.logo)"
+                             style="width:60px;height:50px;"/>
+                    </div>
+                    <div>
+                        <span t-if="docs.company_id.street" t-field="docs.company_id.street"/>
+                        <br/>
+                        <span t-if="docs.company_id.city" t-field="docs.company_id.city"/>
+                        <span t-if="docs.company_id.zip" t-field="docs.company_id.zip"/>,
+                        <br/>
+                        Tel:
+                        <span t-if="docs.company_id.phone" t-field="docs.company_id.phone"/>
+                        <br/>
+                        VAT:
+                        <span t-if="docs.company_id.vat" t-field="docs.company_id.vat"/>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h4 style="text-align:center;">
+                        <strong>Sales Quotation</strong>
+                    </h4>
+                    <table class="table" style="border-collapse: collapse;font-size:12px;">
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Quote</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.name"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>SalesMan</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.user_id.name"/>
+                            </td>
+                        </tr>
+
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>SalesMan Email</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.user_id.work_email"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Date</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.date_order"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Expiry Date</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.validity_date"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Payment Terms</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.payment_term_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Country</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.company_id.country_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="line-height: 3px;">
+                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                <span>Currency</span>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;">
+                                <span t-field="doc.currency_id.name"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
             <div class="page">
                 <div class="oe_structure"/>
@@ -40,9 +134,9 @@
                 </div>
                 <!--> ========================================================================================================== -->
                 <br/>
-                <br/>
-                <br/>
-                <br/>
+<!--                <br/>-->
+<!--                <br/>-->
+<!--                <br/>-->
                 <div class="row">
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
                         <br/>

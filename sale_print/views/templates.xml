@@ -1,7 +1,6 @@
 <odoo>
     <template id="sale.report_saleorder_document">
-<!--        <t t-call="sale_print.custom_bridge_layout">-->
-        <t t-call="web.internal_layout">
+        <t t-call="sale_print.custom_internal_layout">
             <div class="row">
                 <div class="col-6">
                     <div>
@@ -134,9 +133,6 @@
                 </div>
                 <!--> ========================================================================================================== -->
                 <br/>
-<!--                <br/>-->
-<!--                <br/>-->
-<!--                <br/>-->
                 <div class="row">
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
                         <br/>
@@ -412,23 +408,20 @@
                     </div>
                 </div>
                 <div>
-                    <div class="text-left">
-                        <span>License Contract thru e-email</span>
-                        <span>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change
-                            .
-                        </span>
-                        <span>Technology Partners for Trading is not responsible for any Government Charges (Witholding
-                            TAX related to the order)
-                        </span>
-                        <span>Professional Services. Not include in the quote unless otherwise specified</span>
-                        <span>Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot
-                            be cancelled, Returned or Exchanged.
-                        </span>
-                        <span>All Order address to Technology Partners For Trading</span>
-                        <span>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
-                            above.
-                        </span>
-                    </div>
+                    <p>License Contract thru e-email</p>
+                    <p>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change .</p>
+                    <p>Technology Partners for Trading is not responsible for any Government Charges (Witholding TAX
+                        related to the order)
+                    </p>
+                    <p>Professional Services. Not include in the quote unless otherwise specified</p>
+                    <p>Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot be
+                        cancelled, Returned or
+                    </p>
+                    <p>Exchanged.</p>
+                    <p>All Order address to Technology Partners For Trading</p>
+                    <p>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
+                        above.
+                    </p>
                 </div>
                 <!--                <div>-->
                 <!--                    <br/>-->
@@ -464,9 +457,9 @@
                 <!--                </div>-->
                 <br/>
                 <div>
-                    <div style="float:right;">
-                        <img src="/sale_print/static/description/stamp.jpeg"/>
-                    </div>
+                    <!--                    <div style="float:right;">-->
+                    <!--                        <img src="/sale_print/static/description/stamp.jpeg"/>-->
+                    <!--                    </div>-->
                     <div style="float:left;">
                         <span t-esc="doc.note"/>
                     </div>

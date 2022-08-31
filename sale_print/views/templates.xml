@@ -132,10 +132,8 @@
                     </div>
                 </div>
                 <!--> ========================================================================================================== -->
-                <br/>
                 <div class="row">
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
-                        <br/>
                         <h4 style="text-align:center;">
                             <strong>Reseller Details</strong>
                         </h4>
@@ -201,7 +199,6 @@
                         </table>
                     </div>
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
-                        <br/>
                         <h4 style="text-align:center;">
                             <strong>End User Details</strong>
                         </h4>
@@ -265,7 +262,6 @@
                         </table>
                     </div>
                 </div>
-                <br/>
                 <table style="border-collapse: collapse;direction:ltr;width: 100%; text-align:center;"
                        class="text-center">
                     <thead>
@@ -484,6 +480,10 @@
     </record>
 
     <record id="sale.action_report_pro_forma_invoice" model="ir.actions.report">
+        <field name="paperformat_id" ref="sale_print.paperformat_sale_order"/>
+    </record>
+
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
         <field name="paperformat_id" ref="sale_print.paperformat_sale_order"/>
     </record>
 </odoo>

@@ -277,6 +277,12 @@
                             <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
                                 name="th_description" class="text-center">
                                 <span>
+                                    رقم المنتج
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
+                                name="th_description" class="text-center">
+                                <span>
                                     اسم المنتج
                                 </span>
                             </th>

@@ -26,7 +26,7 @@
                         <strong>Sales Quotation</strong>
                     </h4>
                     <table class="table" style="border-collapse: collapse;font-size:12px;">
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Quote</span>
                             </td>
@@ -34,7 +34,7 @@
                                 <span t-field="doc.name"/>
                             </td>
                         </tr>
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>SalesMan</span>
                             </td>
@@ -43,7 +43,7 @@
                             </td>
                         </tr>
 
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>SalesMan Email</span>
                             </td>
@@ -51,7 +51,7 @@
                                 <span t-field="doc.user_id.work_email"/>
                             </td>
                         </tr>
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Date</span>
                             </td>
@@ -59,7 +59,7 @@
                                 <span t-field="doc.date_order"/>
                             </td>
                         </tr>
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Expiry Date</span>
                             </td>
@@ -67,7 +67,7 @@
                                 <span t-field="doc.validity_date"/>
                             </td>
                         </tr>
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Payment Terms</span>
                             </td>
@@ -75,7 +75,7 @@
                                 <span t-field="doc.payment_term_id.name"/>
                             </td>
                         </tr>
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Country</span>
                             </td>
@@ -83,7 +83,7 @@
                                 <span t-field="doc.company_id.country_id.name"/>
                             </td>
                         </tr>
-                        <tr style="line-height: 3px;">
+                        <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Currency</span>
                             </td>
@@ -140,7 +140,7 @@
                             <strong>Reseller Details</strong>
                         </h4>
                         <table class="table" style="border-collapse: collapse;font-size:12px;">
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Company Name</span>
                                 </td>
@@ -148,7 +148,7 @@
                                     <span t-field="doc.company_id.name"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Address</span>
                                 </td>
@@ -156,7 +156,7 @@
                                     <span t-field="doc.company_id.street"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Country</span>
                                 </td>
@@ -164,7 +164,7 @@
                                     <span t-field="doc.company_id.country_id.name"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Contact Person</span>
                                 </td>
@@ -174,7 +174,7 @@
                                     </t>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Phone</span>
                                 </td>
@@ -182,7 +182,7 @@
                                     <span t-field="doc.company_id.phone"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Email Address</span>
                                 </td>
@@ -190,7 +190,7 @@
                                     <span t-field="doc.company_id.email"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Website</span>
                                 </td>
@@ -206,7 +206,7 @@
                             <strong>End User Details</strong>
                         </h4>
                         <table class="table" style="border-collapse: collapse;font-size:12px;">
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Partner Name</span>
                                 </td>
@@ -214,7 +214,7 @@
                                     <span t-field="doc.partner_id.name"/>
                                 </td>
                             </tr>
-                            <tr t-if="doc.partner_id.street" style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.street" style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Address</span>
                                 </td>
@@ -222,7 +222,7 @@
                                     <span t-field="doc.partner_id.street"/>
                                 </td>
                             </tr>
-                            <tr t-if="doc.partner_id.country_id.name" style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.country_id.name" style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Country</span>
                                 </td>
@@ -230,7 +230,7 @@
                                     <span t-field="doc.partner_id.country_id.name"/>
                                 </td>
                             </tr>
-                            <tr t-if="doc.partner_id.phone" style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.phone" style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Phone</span>
                                 </td>
@@ -238,7 +238,7 @@
                                     <span t-field="doc.partner_id.phone"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Email Address</span>
                                 </td>
@@ -246,7 +246,7 @@
                                     <span t-field="doc.partner_id.email"/>
                                 </td>
                             </tr>
-                            <tr t-if="doc.partner_id.website" style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.website" style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Website</span>
                                 </td>
@@ -254,7 +254,7 @@
                                     <span t-field="doc.partner_id.website"/>
                                 </td>
                             </tr>
-                            <tr t-if="doc.partner_id.vat" style="line-height: 3px;">
+                            <tr t-if="doc.partner_id.vat" style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>VAT Number</span>
                                 </td>
@@ -372,7 +372,7 @@
                     </div>
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
                         <table class="table" style="border-collapse: collapse;font-size:12px;">
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Subtotal</span>
                                 </td>
@@ -380,7 +380,7 @@
                                     <span t-field="doc.amount_untaxed"/>
                                 </td>
                             </tr>
-                            <!--                                <tr style="line-height: 3px;">-->
+                            <!--                                <tr style="line-height: 12px;">-->
                             <!--                                    <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
                             <!--                                        <span>VAT Rate</span>-->
                             <!--                                    </td>-->
@@ -388,7 +388,7 @@
                             <!--&lt;!&ndash;                                        <span t-field="doc.tax_totals_json"/>&ndash;&gt;-->
                             <!--                                    </td>-->
                             <!--                                </tr>-->
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>VAT</span>
                                 </td>
@@ -396,7 +396,7 @@
                                     <span t-field="doc.amount_tax"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 3px;">
+                            <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Total</span>
                                 </td>

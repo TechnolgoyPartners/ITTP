@@ -420,7 +420,7 @@
                         </table>
                     </div>
                 </div>
-                <div>
+                <div style="page-break-inside: avoid;">
                     <p>License Contract thru e-email</p>
                     <p>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change .</p>
                     <p>Technology Partners for Trading is not responsible for any Government Charges (Witholding TAX
@@ -435,6 +435,13 @@
                     <p>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
                         above.
                     </p>
+                    <div style="float:right;">
+                        <img src="/sale_print/static/description/stamp.jpeg"/>
+                    </div>
+
+                    <div style="float:left;">
+                        <span t-esc="doc.note"/>
+                    </div>
                 </div>
                 <!--                <div>-->
                 <!--                    <br/>-->
@@ -468,15 +475,6 @@
                 <!--                    <span>Thank You for your business</span><br/>-->
                 <!--                    <span>+966 544720897 , admin@it-tp.com</span>-->
                 <!--                </div>-->
-                <br/>
-                <div>
-                    <div style="float:right;">
-                        <img src="/sale_print/static/description/stamp.jpeg"/>
-                    </div>
-                    <div style="float:left;">
-                        <span t-esc="doc.note"/>
-                    </div>
-                </div>
             </div>
         </t>
     </template>

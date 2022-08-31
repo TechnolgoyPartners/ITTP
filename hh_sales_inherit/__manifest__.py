@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale_management'],
+    'depends': ['base', 'sale_management', 'account_accountant'],
 
     # always loaded
     'data': [
@@ -31,6 +31,8 @@
         'views/templates.xml',
         'data/purchase_order_custom_sequence.xml',
         'views/purchase_order_inherit.xml',
+        'wizard/tax_reporting_wizard.xml',
+        'report/taxes_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

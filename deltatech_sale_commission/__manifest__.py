@@ -14,6 +14,7 @@
         "security/ir.model.access.csv",
         "views/account_invoice_view.xml",
         "report/sale_margin_report.xml",
+        "report/commission_report.xml",
         "views/commission_users_view.xml",
         "views/commission_users_invoice_views.xml",
         "views/user_commission_views.xml",

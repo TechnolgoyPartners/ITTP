@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="sale_margin_commission_tree_report"
+                string="Print"
+                model="sale.margin.report"
+                report_type="qweb-pdf"
+                file="deltatech_sale_commission.print_sales_commission_pdf"
+                name="deltatech_sale_commission.print_sales_commission_pdf"
+                print_report_name="'%s' % (object.user_id.name)"
+        />
+
+        <template id="print_sales_commission_pdf">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <h3 style="color:grey;text-align:center">Commission Report</h3>
+
+                    <br/>
+                    <br/>
+                    <table border="1" class="mt32 table oe_import_grid bg_white">
+                        <thead>
+                            <tr style="border=1">
+                                <th>Product</th>
+                                <th>Sales Person</th>
+                                <th>Commercial Partner</th>
+                                <th>Invoice</th>
+                                <th>Quantity</th>
+                                <th>Sale Value</th>
+                                <th>Purchase Value</th>
+                                <th>Profit</th>
+                                <th>Commission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_quantity" t-value="0"/>
+                            <t t-set="total_sale_val" t-value="0"/>
+                            <t t-set="total_stock_val" t-value="0"/>
+                            <t t-set="total_profit_val" t-value="0"/>
+                            <t t-set="total_commission_computed" t-value="0"/>
+
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td>
+                                        <span t-field="doc.product_id.name"  t-options="{'widget': 'text'}"/>
+
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.user_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.commercial_partner_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.invoice_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.product_uom_qty"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.sale_val"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.stock_val"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.profit_val"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.commission_computed"/>
+                                    </td>
+                                    <t t-set="total_quantity" t-value="total_quantity + doc.product_uom_qty "/>
+                                    <t t-set="total_sale_val" t-value="total_sale_val + doc.sale_val "/>
+                                    <t t-set="total_stock_val" t-value="total_stock_val + doc.stock_val "/>
+                                    <t t-set="total_profit_val" t-value="total_profit_val + doc.profit_val "/>
+                                    <t t-set="total_commission_computed"
+                                       t-value="total_commission_computed + doc.commission_computed "/>
+                                </tr>
+                            </t>
+                            <tr class="text-right">
+                                <td style="border: 1px solid;" colspan="99">
+                                    <strong class="mr16" style="display: inline-block">Quantity</strong>
+                                    <span
+                                            t-out="total_quantity"
+                                    />
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr class="text-right">
+                                <td style="border: 1px solid;" colspan="99">
+                                    <strong class="mr16" style="display: inline-block">Sale Value</strong>
+                                    <span
+                                            t-out="total_sale_val"
+                                    />
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr class="text-right">
+                                <td style="border: 1px solid;" colspan="99">
+                                    <strong class="mr16" style="display: inline-block">Purchase Value</strong>
+                                    <span
+                                            t-out="total_stock_val"
+                                    />
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr class="text-right">
+                                <td style="border: 1px solid;" colspan="99">
+                                    <strong class="mr16" style="display: inline-block">Profit</strong>
+                                    <span
+                                            t-out="total_profit_val"
+                                    />
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr class="text-right">
+                                <td style="border: 1px solid;" colspan="99">
+                                    <strong class="mr16" style="display: inline-block">Commission</strong>
+                                    <span
+                                            t-out="total_commission_computed"
+                                    />
+                                    <br/>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                    <br/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

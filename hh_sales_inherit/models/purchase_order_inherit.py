@@ -14,4 +14,3 @@ class PurchaseOrderInheritCustom(models.Model):
             self.purchase_order_seq = self.env['ir.sequence'].next_by_code('purchase.order.custom')
         else:
             self.purchase_order_seq = 0
-

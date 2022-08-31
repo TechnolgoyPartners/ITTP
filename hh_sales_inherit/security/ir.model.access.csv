@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_quotation_template_custom,access.quotation.template.custom,model_quotation_template_custom,base.group_user,1,1,1,1
 access_shipping_term_custom,access.shipping.term.custom,model_shipping_term_custom,base.group_user,1,1,1,1
+access_tax_reporting_wizard,access.tax.reporting.wizard,model_tax_reporting_wizard,base.group_user,1,1,1,1
+access_tax_reporting_line_wizard,access.tax.reporting.line.wizard,model_tax_reporting_line_wizard,base.group_user,1,1,1,1

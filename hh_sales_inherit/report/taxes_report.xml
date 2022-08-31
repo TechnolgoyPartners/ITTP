@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="taxes_wizard_report"
+                string="View"
+                model="tax.reporting.wizard"
+                report_type="qweb-html"
+                file="hh_sales_inherit.print_taxes_wizard_report_pdf"
+                name="hh_sales_inherit.print_taxes_wizard_report_pdf"
+                print_report_name="'%s' % (object.start_date)"
+        />
+
+        <template id="print_taxes_wizard_report_pdf">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <h3 style="color:grey;text-align:center">Taxes Report</h3>
+                    <t t-foreach="docs" t-as="doc">
+                        <br/>
+                        <br/>
+                        <table border="1" class="mt32 table oe_import_grid bg_white">
+                            <thead>
+                                <tr style="border=1">
+                                    <th>name</th>
+                                    <th>amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.line_ids" t-as="line">
+                                    <td>
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.amount"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

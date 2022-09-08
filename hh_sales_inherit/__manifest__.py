@@ -25,8 +25,10 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/quotation_template.xml',
-        'views/shipping_term.xml',
+        'views/sales_quotation_template.xml',
+        'views/purchase_quotation_template.xml',
+        'views/purchase_shipping_term.xml',
+        'views/sales_shipping_term.xml',
         'views/sale_order_inherit.xml',
         'views/templates.xml',
         'data/purchase_order_custom_sequence.xml',

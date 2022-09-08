@@ -435,13 +435,24 @@
                     <p>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
                         above.
                     </p>
+                    <br/>
+                        <t t-if="doc.quotation_template_custom_id">
+                            <span t-field="doc.quotation_template_custom_id.name"/>
+                            :
+                            <span t-field="doc.note"/>
+                        </t>
+                        <br/>
+                        <t t-if="doc.shipping_term_custom_id">
+                            <span t-field="doc.shipping_term_custom_id.name"/>
+                            :
+                            <span t-field="doc.shipping_note"/>
+                        </t>
+
+
                     <div style="float:right;">
                         <img src="/sale_print/static/description/stamp.jpeg"/>
                     </div>
 
-                    <div style="float:left;">
-                        <span t-esc="doc.note"/>
-                    </div>
                 </div>
                 <!--                <div>-->
                 <!--                    <br/>-->

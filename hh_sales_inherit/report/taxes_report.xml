@@ -26,12 +26,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <t t-set="balance" t-value="0"/>
                                 <tr t-foreach="doc.line_ids" t-as="line">
+                                    <t t-set="balance" t-value="balance + line.amount"/>
                                     <td>
                                         <span t-field="line.name"/>
                                     </td>
                                     <td>
                                         <span t-field="line.amount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>
+                                        <span t-esc="balance"/>
                                     </td>
                                 </tr>
                             </tbody>

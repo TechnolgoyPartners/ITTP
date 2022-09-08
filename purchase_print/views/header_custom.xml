@@ -22,13 +22,6 @@
                         Quotation Reference:
                         <span t-if="docs.origin" t-field="docs.origin"/>
                         <br/>
-                        <t t-if="docs.is_customer == True">
-                            <t t-if="docs.sale_customer_id">
-                                Customer :
-                                <span t-field="docs.sale_customer_id.name"/>
-                            </t>
-                        </t>
-
 
                     </div>
                 </div>

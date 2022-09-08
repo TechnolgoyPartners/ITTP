@@ -29,9 +29,17 @@ class TaxReportingWizard(models.TransientModel):
         result = {}
         for rec in records:
             if result.get(rec.account_id.name, False):
-                result[rec.account_id.name] += rec.debit or rec.credit
+                if rec.credit:
+                    amount = rec.credit
+                else:
+                    amount = rec.debit * (-1)
+                result[rec.account_id.name] += amount
             else:
-                result[rec.account_id.name] = rec.debit or rec.credit
+                if rec.credit:
+                    amount = rec.credit
+                else:
+                    amount = rec.debit * (-1)
+                result[rec.account_id.name] = amount
         print(result)
 
         for key, value in result.items():

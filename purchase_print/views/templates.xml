@@ -32,6 +32,19 @@
                 </t>
             </t>
             <div class="page">
+                <style>
+                    .watermark {
+                    position: absolute;
+                    opacity:0.3;
+                    width:600px;
+                    text-align:center;
+                    padding-top:250px;
+                    }
+
+                </style>
+                <div class="watermark">
+                    <img src="/purchase_print/static/description/technology_watermark.jpeg/"/>
+                </div>
                 <div class="oe_structure"/>
                 <div class="row">
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
@@ -120,6 +133,19 @@
                                     <span t-field="o.partner_id.name"/>
                                 </td>
                             </tr>
+
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <t t-if="docs.is_customer == True">
+                                        <span>Customer</span>
+                                    </t>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <t t-if="docs.sale_customer_id">
+                                        <span t-field="docs.sale_customer_id.name"/>
+                                    </t>
+                                </td>
+                            </tr>
                             <tr style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Date</span>
@@ -133,7 +159,7 @@
                                     <span>Payment Terms</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <span t-field="o.payment_term_id.name"/>
+                                    <span t-field="o.partner_id.property_supplier_payment_term_id.name"/>
                                 </td>
                             </tr>
                             <tr style="line-height: 3px;">
@@ -331,9 +357,6 @@
                     </div>
                 </div>
 
-                <br/>
-                <br/>
-                <br/>
                 <div>
                     <div class="text-left">
                         <span>License Contract thru e-email</span>
@@ -358,6 +381,15 @@
                             above.
                         </span>
                         <br/>
+                        <t t-if="o.quotation_template_custom_id">
+                            <span t-field="o.quotation_template_custom_id.name"/> :
+                            <span t-field="o.note"/>
+                        </t>
+                        <br/>
+                        <t t-if="o.shipping_term_custom_id">
+                            <span t-field="o.shipping_term_custom_id.name"/> :
+                            <span t-field="o.shipping_note"/>
+                        </t>
                     </div>
                 </div>
                 <!--                <div>-->

@@ -11,7 +11,14 @@
 
                <xpath expr="//field[@name='partner_id']" position="before">
                    <!-- Add your fields or attributes here -->
-                   <field name="purchase_order_seq" attrs="{'invisible':[('state', '!=', 'purchase')]}"/>
+                   <field name="purchase_order_seq" readonly="1"/>
+               </xpath>
+
+               <xpath expr="//field[@name='currency_id']" position="after">
+                   <field name="quotation_template_custom_id"/>
+                   <field name="note"/>
+                   <field name="shipping_term_custom_id"/>
+                   <field name="shipping_note"/>
                </xpath>
 
            </field>

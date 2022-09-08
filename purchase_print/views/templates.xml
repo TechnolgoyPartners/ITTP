@@ -32,19 +32,6 @@
                 </t>
             </t>
             <div class="page">
-                <style>
-                    .watermark {
-                    position: absolute;
-                    opacity:0.3;
-                    width:600px;
-                    text-align:center;
-                    padding-top:250px;
-                    }
-
-                </style>
-                <div class="watermark">
-                    <img src="/purchase_print/static/description/technology_watermark.jpeg/"/>
-                </div>
                 <div class="oe_structure"/>
                 <div class="row">
                     <div class="col-6 text-center" style="text-align:center;direction:ltr;">
@@ -357,41 +344,71 @@
                     </div>
                 </div>
 
-                <div>
-                    <div class="text-left">
-                        <span>License Contract thru e-email</span>
+                <!--                <div>-->
+                <div class="text-left">
+                    <span>License Contract thru e-email</span>
+                    <br/>
+                    <span>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change
+                        .
+                    </span>
+                    <br/>
+                    <span>Technology Partners for Trading is not responsible for any Government Charges (Witholding
+                        TAX related to the order)
+                    </span>
+                    <br/>
+                    <span>Professional Services. Not include in the quote unless otherwise specified</span>
+                    <br/>
+                    <span>Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot
+                        be cancelled, Returned or Exchanged.
+                    </span>
+                    <br/>
+                    <span>All Order address to Technology Partners For Trading</span>
+                    <br/>
+                    <span>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
+                        above.
+                    </span>
+                    <br/>
+                    <t t-if="o.quotation_template_custom_id">
+                        <span t-field="o.quotation_template_custom_id.name"/>
+                        :
+                        <span t-field="o.note"/>
+                    </t>
+                    <t t-if="o.shipping_term_custom_id">
                         <br/>
-                        <span>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change
-                            .
-                        </span>
+                        <span t-field="o.shipping_term_custom_id.name"/>
+                        :
+                        <span t-field="o.shipping_note"/>
+                    </t>
+                    <t t-if="o.notes">
                         <br/>
-                        <span>Technology Partners for Trading is not responsible for any Government Charges (Witholding
-                            TAX related to the order)
-                        </span>
-                        <br/>
-                        <span>Professional Services. Not include in the quote unless otherwise specified</span>
-                        <br/>
-                        <span>Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot
-                            be cancelled, Returned or Exchanged.
-                        </span>
-                        <br/>
-                        <span>All Order address to Technology Partners For Trading</span>
-                        <br/>
-                        <span>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
-                            above.
-                        </span>
-                        <br/>
-                        <t t-if="o.quotation_template_custom_id">
-                            <span t-field="o.quotation_template_custom_id.name"/> :
-                            <span t-field="o.note"/>
-                        </t>
-                        <br/>
-                        <t t-if="o.shipping_term_custom_id">
-                            <span t-field="o.shipping_term_custom_id.name"/> :
-                            <span t-field="o.shipping_note"/>
-                        </t>
-                    </div>
+                        <span t-esc="o.notes"/>
+                    </t>
+                    <table style="width:100%;text-align:center;">
+                        <tr>
+                            <td>
+                                <span>______________________________</span>
+                                <br/>
+                                <strong>
+                                    <span>Prepared By</span>
+                                </strong>
+                            </td>
+                            <td>
+                                <img style="max-height:250px;text-align:center;"
+                                     src="purchase_print/static/description/stamp.jpeg"/>
+                            </td>
+                            <td>
+                                <span>______________________________</span>
+                                <br/>
+                                <strong>
+                                    <span>
+                                        signature of receipt
+                                    </span>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
+                <!--                </div>-->
                 <!--                <div>-->
                 <!--                    <br/>-->
                 <!--                    <table style="width:100%;text-align:center;">-->
@@ -423,38 +440,38 @@
                 <!--                <div class="text-center">-->
                 <!--                    <span>Thank You for your business</span><br/>-->
                 <!--                    <span>+966 544720897 , admin@it-tp.com</span>-->
+                <!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+                <!--                <div>-->
+                <!--                    <span t-esc="o.notes"/>-->
                 <!--                </div>-->
-                <div>
-                    <span t-esc="o.notes"/>
-                </div>
-                <div class="oe_structure"/>
-                <div>
-                    <br/>
-                    <table style="width:100%;text-align:center;">
-                        <tr>
-                            <td>
-                                <span>______________________________</span>
-                                <br/>
-                                <strong>
-                                    <span>Prepared By</span>
-                                </strong>
-                            </td>
-                            <td>
-                                <img style="max-height:250px;text-align:center;"
-                                     src="purchase_print/static/description/stamp.jpeg"/>
-                            </td>
-                            <td>
-                                <span>______________________________</span>
-                                <br/>
-                                <strong>
-                                    <span>
-                                        signature of receipt
-                                    </span>
-                                </strong>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <!--                <div class="oe_structure"/>-->
+                <!--                <div>-->
+                <!--                    <br/>-->
+                <!--                    <table style="width:100%;text-align:center;">-->
+                <!--                        <tr>-->
+                <!--                            <td>-->
+                <!--                                <span>______________________________</span>-->
+                <!--                                <br/>-->
+                <!--                                <strong>-->
+                <!--                                    <span>Prepared By</span>-->
+                <!--                                </strong>-->
+                <!--                            </td>-->
+                <!--                            <td>-->
+                <!--                                <img style="max-height:250px;text-align:center;"-->
+                <!--                                     src="purchase_print/static/description/stamp.jpeg"/>-->
+                <!--                            </td>-->
+                <!--                            <td>-->
+                <!--                                <span>______________________________</span>-->
+                <!--                                <br/>-->
+                <!--                                <strong>-->
+                <!--                                    <span>-->
+                <!--                                        signature of receipt-->
+                <!--                                    </span>-->
+                <!--                                </strong>-->
+                <!--                            </td>-->
+                <!--                        </tr>-->
+                <!--                    </table>-->
+                <!--                </div>-->
             </div>
         </t>
     </template>

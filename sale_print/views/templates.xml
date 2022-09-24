@@ -48,7 +48,7 @@
                                 <span>SalesMan Email</span>
                             </td>
                             <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="doc.user_id.work_email"/>
+                                <span t-field="doc.user_id.login"/>
                             </td>
                         </tr>
                         <tr style="line-height: 12px;">
@@ -59,14 +59,14 @@
                                 <span t-field="doc.date_order"/>
                             </td>
                         </tr>
-                        <tr style="line-height: 12px;">
-                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                <span>Expiry Date</span>
-                            </td>
-                            <td colspan="4" style="border: 1px solid black;">
-                                <span t-field="doc.validity_date"/>
-                            </td>
-                        </tr>
+                        <!--                        <tr style="line-height: 12px;">-->
+                        <!--                            <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+                        <!--                                <span>Expiry Date</span>-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="4" style="border: 1px solid black;">-->
+                        <!--                                <span t-field="doc.validity_date"/>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
                         <tr style="line-height: 12px;">
                             <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                 <span>Payment Terms</span>
@@ -163,16 +163,16 @@
                                     <span t-field="doc.company_id.country_id.name"/>
                                 </td>
                             </tr>
-                            <tr style="line-height: 12px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Contact Person</span>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <t t-if="doc.company_id.partner_id.child_ids">
-                                        <span t-field="doc.company_id.partner_id.child_ids[0].name"/>
-                                    </t>
-                                </td>
-                            </tr>
+                            <!--                            <tr style="line-height: 12px;">-->
+                            <!--                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">-->
+                            <!--                                    <span>Contact Person</span>-->
+                            <!--                                </td>-->
+                            <!--                                <td colspan="4" style="border: 1px solid black;">-->
+                            <!--                                    <t t-if="doc.company_id.partner_id.child_ids">-->
+                            <!--                                        <span t-field="doc.company_id.partner_id.child_ids[0].name"/>-->
+                            <!--                                    </t>-->
+                            <!--                                </td>-->
+                            <!--                            </tr>-->
                             <tr style="line-height: 12px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                     <span>Phone</span>
@@ -264,6 +264,7 @@
                         </table>
                     </div>
                 </div>
+                <br/>
                 <table style="border-collapse: collapse;direction:ltr;width: 100%; text-align:center;"
                        class="text-center">
                     <thead>
@@ -271,7 +272,7 @@
                             <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
                                 name="th_description" class="text-center">
                                 <span>
-                                    SR
+                                    SN
                                 </span>
                             </th>
                             <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
@@ -279,47 +280,15 @@
                                 <span>
                                     رقم المنتج
                                 </span>
+                                <br/>
+                                <span>Product Number</span>
                             </th>
                             <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
                                 name="th_description" class="text-center">
                                 <span>
                                     اسم المنتج
                                 </span>
-                            </th>
-                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"
-                                name="th_quantity" class="text-center">
-                                <span>
-                                    الكمية
-                                </span>
-                            </th>
-                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"
-                                name="th_priceunit" class="text-center">
-                                <span>
-                                    السعر
-                                </span>
-                            </th>
-                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"
-                                name="th_priceunit" class="text-center">
-                                <span>
-                                    المجموع
-                                </span>
-                            </th>
-                        </tr>
-                        <tr style="border: 1px solid black;direction:ltr;font-size: 20px;">
-                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
-                                name="th_description" class="text-center">
-                                <span>
-                                    SR
-                                </span>
-                            </th>
-                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
-                                name="th_description" class="text-center">
-                                <span>
-                                    Serial
-                                </span>
-                            </th>
-                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
-                                name="th_description" class="text-center">
+                                <br/>
                                 <span>
                                     Product Name
                                 </span>
@@ -327,11 +296,19 @@
                             <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"
                                 name="th_quantity" class="text-center">
                                 <span>
+                                    الكمية
+                                </span>
+                                <br/>
+                                <span>
                                     Qty
                                 </span>
                             </th>
                             <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"
                                 name="th_priceunit" class="text-center">
+                                <span>
+                                    السعر
+                                </span>
+                                <br/>
                                 <span>
                                     Unit price
                                 </span>
@@ -339,10 +316,52 @@
                             <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"
                                 name="th_priceunit" class="text-center">
                                 <span>
+                                    المجموع
+                                </span>
+                                <br/>
+                                <span>
                                     subtotal
                                 </span>
                             </th>
                         </tr>
+<!--                        <tr style="border: 1px solid black;direction:ltr;font-size: 20px;">-->
+<!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
+<!--                                name="th_description" class="text-center">-->
+<!--                                <span>-->
+<!--                                    SN-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
+<!--                                name="th_description" class="text-center">-->
+<!--                                <span>-->
+<!--                                    Product Number-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
+<!--                                name="th_description" class="text-center">-->
+<!--                                <span>-->
+<!--                                    Product Name-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
+<!--                                name="th_quantity" class="text-center">-->
+<!--                                <span>-->
+<!--                                    Qty-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
+<!--                                name="th_priceunit" class="text-center">-->
+<!--                                <span>-->
+<!--                                    Unit price-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
+<!--                                name="th_priceunit" class="text-center">-->
+<!--                                <span>-->
+<!--                                    subtotal-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                        </tr>-->
                     </thead>
                     <tbody style="border-collapse: collapse;direction:ltr;font-size: 15px;">
                         <t t-set="sr" t-value="0"/>
@@ -420,22 +439,23 @@
                         </table>
                     </div>
                 </div>
-                <div style="page-break-inside: avoid;">
-                    <p>License Contract thru e-email</p>
-                    <p>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change .</p>
-                    <p>Technology Partners for Trading is not responsible for any Government Charges (Witholding TAX
-                        related to the order)
-                    </p>
-                    <p>Professional Services. Not include in the quote unless otherwise specified</p>
-                    <p>Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot be
-                        cancelled, Returned or
-                    </p>
-                    <p>Exchanged.</p>
-                    <p>All Order address to Technology Partners For Trading</p>
-                    <p>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
-                        above.
-                    </p>
-                    <br/>
+                <div class="row">
+                    <div class="column text-left" style="page-break-inside: avoid;">
+                        <p>License Contract thru e-email</p>
+                        <p>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change .</p>
+                        <p>Technology Partners for Trading is not responsible for any Government Charges (Witholding TAX
+                            related to the order)
+                        </p>
+                        <p>Professional Services. Not include in the quote unless otherwise specified</p>
+                        <p>Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot be
+                            cancelled, Returned or
+                        </p>
+                        <p>Exchanged.</p>
+                        <p>All Order address to Technology Partners For Trading</p>
+                        <p>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
+                            above.
+                        </p>
+                        <br/>
                         <t t-if="doc.quotation_template_custom_id">
                             <span t-field="doc.quotation_template_custom_id.name"/>
                             :
@@ -449,11 +469,14 @@
                         </t>
 
 
-                    <div style="float:right;">
-                        <img src="/sale_print/static/description/stamp.jpeg"/>
                     </div>
-
+                    <div class="column text-left">
+                        <div class="card text-right">
+                            <img src="/sale_print/static/description/stamp.jpeg"/>
+                        </div>
+                    </div>
                 </div>
+
                 <!--                <div>-->
                 <!--                    <br/>-->
                 <!--                    <table style="width:100%;text-align:center;">-->

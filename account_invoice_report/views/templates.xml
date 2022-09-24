@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-4" name="qr_code"/>
                 <div class="col-4">
-                    <p>
+                    <p style="font-size:15px">
                         Partner :
                         <span t-esc="o.partner_id.name"/>
                         <br/>
@@ -69,7 +69,6 @@
                         <t t-if="o.partner_id.bank_ids">
                             <span t-esc="o.partner_id.bank_ids[0].bank_id.name + ' ' + o.partner_id.bank_ids[0].acc_number"/>
                         </t>
-                        <br/>
                     </p>
                 </div>
             </div>
@@ -264,10 +263,18 @@
                                 </div>
                             </div>
                             <div class="row" t-if="o.invoice_origin" name="invoice_origin">
-                                <div class="col-3">
-                                    <strong style="white-space:nowrap">Reference:
-                                    </strong>
-                                </div>
+                                <t t-if="o.move_type == 'in_invoice' and o.state == 'posted'">
+                                    <div class="col-3">
+                                        <strong style="white-space:nowrap">PO Number:
+                                        </strong>
+                                    </div>
+                                </t>
+                                <t t-if="o.move_type == 'out_invoice' and o.state == 'posted'">
+                                    <div class="col-3">
+                                        <strong style="white-space:nowrap">Reference :
+                                        </strong>
+                                    </div>
+                                </t>
                                 <div class="col-5" style="font-size: 12px;">
                                     <span t-field="o.invoice_origin"/>
                                 </div>
@@ -309,6 +316,16 @@
                                 <br/>
                                 <span>
                                     SN
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;text-align: center;" name="th_description"
+                                class="text-center">
+                                <span>
+                                    رقم المنتج
+                                </span>
+                                <br/>
+                                <span>
+                                    Product Number
                                 </span>
                             </th>
                             <th style="border: 1px solid black;text-align: center;" name="th_description"
@@ -418,6 +435,14 @@
                                     <t t-set="sr" t-value="sr + 1"/>
                                     <td class="text-center">
                                         <span class="text-nowrap" t-esc="sr"/>
+                                    </td>
+                                    <td style="border: 1px solid black;" name="account_invoice_line_barcode">
+                                        <span t-field="line.product_id.barcode" t-options="{'widget': 'text'}"/>
+                                        <t t-if="line.product_id.barcode != line.with_context(lang='ar_001').product_id.barcode">
+                                            <br/>
+                                            <span t-field="line.with_context(lang='ar_001').product_id.barcode"
+                                                  t-options="{'widget': 'text'}"/>
+                                        </t>
                                     </td>
                                     <td style="border: 1px solid black;" name="account_invoice_line_name">
                                         <span t-field="line.product_id.name" t-options="{'widget': 'text'}"/>
@@ -640,34 +665,65 @@
                             <span>Bank Account Details تفاصيل الحساب البنكي</span>
                         </strong>
                     </div>
-                    <div class="text-left">
-                        <span>Beneficiary: Technology Partners for Trading</span>
-                    </div>
-                    <div class="text-left">
-                        <span>Bank Name: Al Rajhi Bank</span>
-                    </div>
-                    <div class="text-left">
-                        <span>Bank Address : Al Riyadh – Al Mazraa. KSA ACc NO : 446608010236927</span>
-                    </div>
-                    <div class="text-left">
-                        <span>Swift :RJHISARI</span>
-                    </div>
-                    <div class="text-left">
-                        <span style="float:left;">IBAN: SA0680000446608010236927</span>
-                        <span style="float:right;">Currency: SAR</span>
-                    </div>
+                    <div class="row">
+                        <div class="column text-left">
 
+                            <div>
+                                <span>Beneficiary: Technology Partners for Trading</span>
+                            </div>
+                            <div>
+                                <span>Bank Name: Al Rajhi Bank</span>
+                            </div>
+                            <div>
+                                <span>Bank Address : Al Riyadh – Al Mazraa.</span>
+                            </div>
+                            <div>
+                                <span>KSA ACc NO : 446608010236927</span>
+                            </div>
+                            <div>
+                                <span>Swift :RJHISARI</span>
+                            </div>
+                            <div>
+                                <span style="float:left;">IBAN: SA0680000446608010236927</span>
+                                <br/>
+                                <span style="float:left;">Currency: SAR</span>
+                            </div>
+                        </div>
+                        <div class="column text-left">
+                            <div class="card text-right">
+                                <img style="max-height:150px;text-align:center;"
+                                     src="/account_invoice_report/static/description/stamp.jpeg"/>
+                                <br/>
+
+                                <t t-if="o.is_first_print == True">
+                                    <t t-set="o.is_first_print = False"/>
+                                    <span>الفاتورة الاصليه</span>
+                                </t>
+                                <t t-if="o.is_first_print == False">
+                                    <span>الفاتورة نسخه طبق الاصل</span>
+                                </t>
+                            </div>
+                        </div>
+
+                    </div>
                     <div>
                         <br/>
                         <table style="width:100%;text-align:center;">
                             <tr>
                                 <td>
-                                    <span>______________________________</span>
-                                    <span>Prepared By</span>
+                                    <span style="font-size=13px">______________________________</span>
+                                    <br/>
+                                    <span style="font-size=13px">Prepared By</span>
                                 </td>
                                 <td>
-                                    <span>______________________________</span>
-                                    <span>Approved By</span>
+                                    <span style="font-size=13px">______________________________</span>
+                                    <br/>
+                                    <span style="font-size=13px">Signature of receipt</span>
+                                </td>
+                                <td>
+                                    <span style="font-size=13px">______________________________</span>
+                                    <br/>
+                                    <span style="font-size=13px">Approved By</span>
                                 </td>
                             </tr>
                         </table>
@@ -676,18 +732,7 @@
                         <span>This Document Generated From The System</span>
                         <span>تصدر الیا"من النظام ولا تحتاج إلى توقيع أو ختم</span>
                     </div>
-                    <div style="text-align:center;">
-                        <img style="max-height:150px;text-align:center;"
-                             src="/account_invoice_report/static/description/stamp.jpeg"/>
 
-                        <t t-if="o.is_first_print == True">
-                            <t t-set="o.is_first_print = False" />
-                            <span>الفاتورة الاصليه</span>
-                        </t>
-                        <t t-if="o.is_first_print == False">
-                            <span>الفاتورة نسخه طبق الاصل</span>
-                        </t>
-                    </div>
                 </div>
             </div>
         </t>

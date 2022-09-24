@@ -4,7 +4,7 @@ import logging
 import math
 import re
 import time
-import num2word
+import num2words
 from lxml import etree
 from odoo import api, fields, models, tools, _
 

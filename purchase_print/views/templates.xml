@@ -65,12 +65,10 @@
                             </tr>
                             <tr style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <span>Contact Person</span>
+                                    <span>Sales Person</span>
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
-                                    <t t-if="o.company_id.partner_id.child_ids">
-                                        <span t-field="o.company_id.partner_id.child_ids[0].name"/>
-                                    </t>
+                                    <span t-field="o.user_id.name"/>
                                 </td>
                             </tr>
                             <tr style="line-height: 3px;">
@@ -122,16 +120,18 @@
                             </tr>
 
                             <tr style="line-height: 3px;">
-                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
-                                    <t t-if="docs.is_customer == True">
+                                <t t-if="docs.is_customer == True">
+
+                                    <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
                                         <span>Customer</span>
-                                    </t>
-                                </td>
-                                <td colspan="4" style="border: 1px solid black;">
-                                    <t t-if="docs.sale_customer_id">
-                                        <span t-field="docs.sale_customer_id.name"/>
-                                    </t>
-                                </td>
+                                    </td>
+                                    <td colspan="4" style="border: 1px solid black;">
+                                        <t t-if="docs.sale_customer_id">
+                                            <span t-field="docs.sale_customer_id.name"/>
+                                        </t>
+                                    </td>
+                                </t>
+
                             </tr>
                             <tr style="line-height: 3px;">
                                 <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
@@ -139,6 +139,14 @@
                                 </td>
                                 <td colspan="4" style="border: 1px solid black;">
                                     <span t-field="o.date_order"/>
+                                </td>
+                            </tr>
+                            <tr style="line-height: 3px;">
+                                <td colspan="2" style="border: 1px solid black;background-color: #e9ecef;">
+                                    <span>Tax ID</span>
+                                </td>
+                                <td colspan="4" style="border: 1px solid black;">
+                                    <span t-field="o.partner_id.vat"/>
                                 </td>
                             </tr>
                             <tr style="line-height: 3px;">
@@ -247,7 +255,13 @@
                             <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
                                 name="th_description" class="text-center">
                                 <span>
-                                    SR
+                                    SN
+                                </span>
+                            </th>
+                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
+                                name="th_productnumber" class="text-center">
+                                <span>
+                                    Product Number
                                 </span>
                             </th>
                             <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"
@@ -286,8 +300,12 @@
                                         <span class="text-nowrap" t-esc="sr"/>
                                     </td>
                                     <td style="border: 1px solid black;" class="text-center">
+                                        <span t-field="line.product_id.barcode"/>
+                                    </td>
+                                    <td style="border: 1px solid black;" class="text-center">
                                         <span t-field="line.product_id.name"/>
                                     </td>
+
                                     <td style="border: 1px solid black;" class="text-center">
                                         <span t-field="line.product_uom_qty"/>
                                     </td>
@@ -344,28 +362,19 @@
                     </div>
                 </div>
 
-                <div class="text-left">
-                    <span>License Contract thru e-email</span>
-                    <br/>
-                    <span>ALL Prices are in SA. Quoted prices are not valid in case of quantity or product change
-                        .
-                    </span>
-                    <br/>
-                    <span>Technology Partners for Trading is not responsible for any Government Charges (Witholding
-                        TAX related to the order)
-                    </span>
-                    <br/>
-                    <span>Professional Services. Not include in the quote unless otherwise specified</span>
-                    <br/>
-                    <span>Cancellation Policy - once order is placed with the Technology Partners /Vendor, it cannot
-                        be cancelled, Returned or Exchanged.
-                    </span>
-                    <br/>
-                    <span>All Order address to Technology Partners For Trading</span>
-                    <br/>
-                    <span>By sending us the PO, Customer (recipient) agreed with the terms , conditions as mentioned
-                        above.
-                    </span>
+                <div class="text-left" style="font-size:15px">
+                    License Contract thru E-mail<br/>
+                    ALL Prices are in SAR.<br/>
+                    Quoted prices are not valid in case of quantity or product change<br/>
+                    Technology Partners for Trading is not responsible for any Government Charges (Withholding TAX
+                    related to the order)<br/>
+                    Professional Services. Not included in the quote unless otherwise specified<br/>
+                    Cancellation Policy - once the order is placed with the Technology Partners /Vendor,
+                    it cannot be canceled, Returned or Exchanged.<br/>
+                    All Order address to Technology Partners for Trading
+                    Validity is mentioned above, and prices are subject to change after that date.<br/>
+                    By sending us the PO, The Customer (recipient) agreed with the terms, The conditions mentioned
+                    above.
                     <t t-if="o.quotation_template_custom_id">
                         <br/>
                         <span t-field="o.quotation_template_custom_id.name"/>
@@ -392,7 +401,7 @@
                                 </strong>
                             </td>
                             <td>
-                                <img style="height:120px;text-align:center;"
+                                <img style="height:150px;text-align:center;"
                                      src="purchase_print/static/description/stamp.jpeg"/>
                             </td>
                             <td>

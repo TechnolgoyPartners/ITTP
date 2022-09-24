@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="partner_account_report_template">
+            <t t-set="data_report_landscape" t-value="True"/>
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <t t-if="doc.partner_ids">
+                            <h3 style="color:grey;text-align:center">Partner Account Report</h3>
+                        </t>
+                        <t t-elif="doc.journal_ids">
+                            <h3 style="color:grey;text-align:center">Journal Account Report</h3>
+                        </t>
+                        <t t-elif="doc.account_analytic_ids">
+                            <h3 style="color:grey;text-align:center">Analytic Account Report</h3>
+                        </t>
+                        <t t-elif="doc.analytic_tag_ids">
+                            <h3 style="color:grey;text-align:center">Analytic Tag Account Report</h3>
+                        </t>
+                        <t t-else="">
+                            <h3 style="color:grey;text-align:center">Account Report</h3>
+                        </t>
+                        <div class="act_as_row">
+                            <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;"
+                                 class="act_as_cell">
+                                From:
+                                <span t-esc="doc.start_date"/>
+                                To:
+                                <span t-esc="doc.end_date"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <t t-if="doc.partner_ids">
+                            <t t-foreach="doc.account_move_line_ids.read_group(
+                                              domain=[('id', 'in', doc.account_move_line_ids.ids)],
+                                              fields=['account_id'],
+                                              groupby=['account_id'])" t-as="account">
+                                <t t-foreach="doc.account_move_line_ids.read_group(
+                                              domain=[('id', 'in', doc.account_move_line_ids.ids), ('account_id', '=', account['account_id'][0])],
+                                              fields=['partner_id'],
+                                              groupby=['partner_id'])" t-as="partner">
+                                    <t t-if="partner['partner_id']">
+                                        <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;">
+                                            <span t-esc="doc.get_account_name(account['account_id'][0])"/>
+                                        </div>
+                                        <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;">
+                                            <span t-esc="doc.get_partner_name(partner['partner_id'][0])"/>
+                                        </div>
+                                        <table border="1" class="table table-bordered bg_white">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Entry</th>
+                                                    <th>Journal</th>
+                                                    <th>Account</th>
+                                                    <th>Partner</th>
+                                                    <th>Ref - Label</th>
+                                                    <th>Analytic Account</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
+                                                    <th>Balance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody">
+                                                <t t-set="initial_balance"
+                                                   t-value="doc.get_initial_balance(partner['partner_id'][0], 'partner', account['account_id'][0])"/>
+                                                <t t-set="total_debit" t-value="0"/>
+                                                <t t-set="total_credit" t-value="0"/>
+                                                <t t-set="current_balance" t-value="0"/>
+                                                <tr t-if="initial_balance and doc.is_initial_balance"
+                                                    style="border: 1px solid grey;">
+                                                    <td colspan="6" style="border: 1px solid grey;"/>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span>Initial Balance</span>
+                                                    </td>
+                                                    <td colspan="2" style="border: 1px solid grey;"/>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-esc="initial_balance"
+                                                              t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                    </td>
+                                                    <t t-set="current_balance"
+                                                       t-value="current_balance + initial_balance"/>
+                                                </tr>
+                                                <tr t-foreach="doc.account_move_line_ids.sorted(key=lambda x:x.date).filtered(lambda
+                                            line: line.partner_id.id == partner['partner_id'][0] and line.account_id.id == account['account_id'][0])"
+                                                    t-as="move"
+                                                    style="border: 1px solid grey;">
+                                                    <t t-set="total_debit" t-value="total_debit + move.debit"/>
+                                                    <t t-set="total_credit" t-value="total_credit + move.credit"/>
+                                                    <t t-set="current_balance"
+                                                       t-value="current_balance + (move.debit - move.credit)"/>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-field="move.date"/>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span
+                                                                t-att-res-id="move.move_id.id"
+                                                                res-model="account.move"
+                                                                view-type="form"
+                                                        >
+                                                            <span t-field="move.move_id"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span
+                                                                t-att-res-id="move.journal_id.id"
+                                                                res-model="account.journal"
+                                                                view-type="form"
+                                                        >
+                                                            <span t-field="move.journal_id"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span
+                                                                t-att-res-id="move.account_id.id"
+                                                                res-model="account.account"
+                                                                view-type="form"
+                                                        >
+                                                            <span t-field="move.account_id"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span
+                                                                t-att-res-id="move.partner_id.id"
+                                                                res-model="res.partner"
+                                                                view-type="form"
+                                                        >
+                                                            <span t-field="move.partner_id"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-esc="doc.get_ref_label(move.ref, move.name)"/>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span
+                                                                t-att-res-id="move.analytic_account_id.id"
+                                                                res-model="account.analytic.account"
+                                                                view-type="form"
+                                                        >
+                                                            <span t-field="move.analytic_account_id"/>
+                                                        </span>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-field="move.debit"/>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-field="move.credit"/>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-esc="current_balance"
+                                                              t-options="{'widget': 'monetary', 'display_currency': move.currency_id}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border: 1px solid grey;">
+                                                    <td style="border: 1px solid grey;" colspan="7">
+                                                        Total:
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-esc="total_debit"/>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-esc="total_credit"/>
+                                                    </td>
+                                                    <td style="border: 1px solid grey;">
+                                                        <span t-esc="current_balance"
+                                                              t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-elif="doc.journal_ids">
+                            <t t-foreach="doc.account_move_line_ids.read_group(
+                                              domain=[('id', 'in', doc.account_move_line_ids.ids)],
+                                              fields=['journal_id'],
+                                              groupby=['journal_id'])" t-as="journal">
+                                <t t-if="journal['journal_id']">
+                                    <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;">
+                                        <span t-esc="doc.get_journal_name(journal['journal_id'][0])"/>
+                                    </div>
+                                    <table border="1" class="table table-bordered bg_white">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Entry</th>
+                                                <th>Journal</th>
+                                                <th>Account</th>
+                                                <th>Partner</th>
+                                                <th>Ref - Label</th>
+                                                <th>Analytic Account</th>
+                                                <th>Debit</th>
+                                                <th>Credit</th>
+                                                <th>Balance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody">
+                                            <t t-set="initial_balance"
+                                               t-value="doc.get_initial_balance(journal['journal_id'][0], 'journal')"/>
+                                            <t t-set="total_debit" t-value="0"/>
+                                            <t t-set="total_credit" t-value="0"/>
+                                            <t t-set="current_balance" t-value="0"/>
+                                            <tr t-if="initial_balance and doc.is_initial_balance"
+                                                style="border: 1px solid grey;">
+                                                <td colspan="6" style="border: 1px solid grey;"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span>Initial Balance</span>
+                                                </td>
+                                                <td colspan="2" style="border: 1px solid grey;"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="initial_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                </td>
+                                                <t t-set="current_balance"
+                                                   t-value="current_balance + initial_balance"/>
+                                            </tr>
+                                            <tr t-foreach="doc.account_move_line_ids.sorted(key=lambda x:x.date).filtered(lambda
+                                            line: line.journal_id.id == journal['journal_id'][0])"
+                                                t-as="move"
+                                                style="border: 1px solid grey;">
+                                                <t t-set="total_debit" t-value="total_debit + move.debit"/>
+                                                <t t-set="total_credit" t-value="total_credit + move.credit"/>
+                                                <t t-set="current_balance"
+                                                   t-value="current_balance + (move.debit - move.credit)"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.date"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.move_id.id"
+                                                            res-model="account.move"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.move_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.journal_id.id"
+                                                            res-model="account.journal"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.journal_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.account_id.id"
+                                                            res-model="account.account"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.account_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.partner_id.id"
+                                                            res-model="res.partner"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.partner_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="doc.get_ref_label(move.ref, move.name)"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.analytic_account_id.id"
+                                                            res-model="account.analytic.account"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.analytic_account_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.debit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.credit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="current_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': move.currency_id}"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="border: 1px solid grey;">
+                                                <td style="border: 1px solid grey;" colspan="7">
+                                                    Total:
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="total_debit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="total_credit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="current_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-elif="doc.account_analytic_ids">
+                            <t t-foreach="doc.account_move_line_ids.read_group(
+                                              domain=[('id', 'in', doc.account_move_line_ids.ids)],
+                                              fields=['analytic_account_id'],
+                                              groupby=['analytic_account_id'])" t-as="analytic">
+                                <t t-if="analytic['analytic_account_id']">
+                                    <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;">
+                                        <span t-esc="doc.get_analytic_name(analytic['analytic_account_id'][0])"/>
+                                    </div>
+                                    <table border="1" class="table table-bordered bg_white">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Entry</th>
+                                                <th>Journal</th>
+                                                <th>Account</th>
+                                                <th>Partner</th>
+                                                <th>Ref - Label</th>
+                                                <th>Analytic Account</th>
+                                                <th>Debit</th>
+                                                <th>Credit</th>
+                                                <th>Balance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody">
+                                            <t t-set="initial_balance"
+                                               t-value="doc.get_initial_balance(analytic['analytic_account_id'][0], 'analytic')"/>
+                                            <t t-set="total_debit" t-value="0"/>
+                                            <t t-set="total_credit" t-value="0"/>
+                                            <t t-set="current_balance" t-value="0"/>
+                                            <tr t-if="initial_balance and doc.is_initial_balance"
+                                                style="border: 1px solid grey;">
+                                                <td colspan="6" style="border: 1px solid grey;"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span>Initial Balance</span>
+                                                </td>
+                                                <td colspan="2" style="border: 1px solid grey;"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="initial_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                </td>
+                                                <t t-set="current_balance"
+                                                   t-value="current_balance + initial_balance"/>
+                                            </tr>
+                                            <tr t-foreach="doc.account_move_line_ids.sorted(key=lambda x:x.date).filtered(lambda
+                                            line: line.analytic_account_id.id == analytic['analytic_account_id'][0])"
+                                                t-as="move"
+                                                style="border: 1px solid grey;">
+                                                <t t-set="total_debit" t-value="total_debit + move.debit"/>
+                                                <t t-set="total_credit" t-value="total_credit + move.credit"/>
+                                                <t t-set="current_balance"
+                                                   t-value="current_balance + (move.debit - move.credit)"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.date"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.move_id.id"
+                                                            res-model="account.move"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.move_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.journal_id.id"
+                                                            res-model="account.journal"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.journal_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.account_id.id"
+                                                            res-model="account.account"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.account_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.partner_id.id"
+                                                            res-model="res.partner"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.partner_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="doc.get_ref_label(move.ref, move.name)"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.analytic_account_id.id"
+                                                            res-model="account.analytic.account"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.analytic_account_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.debit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.credit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="current_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': move.currency_id}"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="border: 1px solid grey;">
+                                                <td style="border: 1px solid grey;" colspan="7">
+                                                    Total:
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="total_debit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="total_credit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="current_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-elif="doc.analytic_tag_ids">
+                            <t t-set="tags" t-value="doc.get_analytic_tags()"/>
+                            <t t-foreach="tags" t-as="tag">
+                                <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;">
+                                    <span t-esc="tag.name"/>
+                                </div>
+                                <table border="1" class="table table-bordered bg_white">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Entry</th>
+                                            <th>Journal</th>
+                                            <th>Account</th>
+                                            <th>Partner</th>
+                                            <th>Ref - Label</th>
+                                            <th>Analytic Account</th>
+                                            <th>Debit</th>
+                                            <th>Credit</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="invoice_tbody">
+                                        <t t-set="initial_balance"
+                                           t-value="doc.get_initial_balance(tag.ids, 'tag')"/>
+                                        <t t-set="total_debit" t-value="0"/>
+                                        <t t-set="total_credit" t-value="0"/>
+                                        <t t-set="current_balance" t-value="0"/>
+                                        <tr t-if="initial_balance and doc.is_initial_balance"
+                                            style="border: 1px solid grey;">
+                                            <td colspan="6" style="border: 1px solid grey;"/>
+                                            <td style="border: 1px solid grey;">
+                                                <span>Initial Balance</span>
+                                            </td>
+                                            <td colspan="2" style="border: 1px solid grey;"/>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-esc="initial_balance"
+                                                      t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                            </td>
+                                            <t t-set="current_balance"
+                                               t-value="current_balance + initial_balance"/>
+                                        </tr>
+
+                                        <tr t-foreach="doc.account_move_line_ids.sorted(key=lambda x:x.date).filtered(lambda
+                                            line: line.analytic_tag_ids.id == tag.id)"
+                                            t-as="move"
+                                            style="border: 1px solid grey;">
+                                            <t t-set="total_debit" t-value="total_debit + move.debit"/>
+                                            <t t-set="total_credit" t-value="total_credit + move.credit"/>
+                                            <t t-set="current_balance"
+                                               t-value="current_balance + (move.debit - move.credit)"/>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-field="move.date"/>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span
+                                                        t-att-res-id="move.move_id.id"
+                                                        res-model="account.move"
+                                                        view-type="form"
+                                                >
+                                                    <span t-field="move.move_id"/>
+                                                </span>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span
+                                                        t-att-res-id="move.journal_id.id"
+                                                        res-model="account.journal"
+                                                        view-type="form"
+                                                >
+                                                    <span t-field="move.journal_id"/>
+                                                </span>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span
+                                                        t-att-res-id="move.account_id.id"
+                                                        res-model="account.account"
+                                                        view-type="form"
+                                                >
+                                                    <span t-field="move.account_id"/>
+                                                </span>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span
+                                                        t-att-res-id="move.partner_id.id"
+                                                        res-model="res.partner"
+                                                        view-type="form"
+                                                >
+                                                    <span t-field="move.partner_id"/>
+                                                </span>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-esc="doc.get_ref_label(move.ref, move.name)"/>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span
+                                                        t-att-res-id="move.analytic_account_id.id"
+                                                        res-model="account.analytic.account"
+                                                        view-type="form"
+                                                >
+                                                    <span t-field="move.analytic_account_id"/>
+                                                </span>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-field="move.debit"/>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-field="move.credit"/>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-esc="current_balance"
+                                                      t-options="{'widget': 'monetary', 'display_currency': move.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="border: 1px solid grey;">
+                                            <td style="border: 1px solid grey;" colspan="7">
+                                                Total:
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-esc="total_debit"/>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-esc="total_credit"/>
+                                            </td>
+                                            <td style="border: 1px solid grey;">
+                                                <span t-esc="current_balance"
+                                                      t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <t t-foreach="doc.account_move_line_ids.read_group(
+                                              domain=[('id', 'in', doc.account_move_line_ids.ids)],
+                                              fields=['account_id'],
+                                              groupby=['account_id'])" t-as="account">
+                                <t t-if="account['account_id']">
+                                    <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;">
+                                        <span t-esc="doc.get_account_name(account['account_id'][0])"/>
+                                    </div>
+                                    <div style="text-align:left;font-size: 150%;color: black; font-weight: bold;">
+                                        <span t-esc="doc.get_account_name(account['account_id'][0])"/>
+                                    </div>
+                                    <table border="1" class="table table-bordered bg_white">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Entry</th>
+                                                <th>Journal</th>
+                                                <th>Account</th>
+                                                <th>Partner</th>
+                                                <th>Ref - Label</th>
+                                                <th>Analytic Account</th>
+                                                <th>Debit</th>
+                                                <th>Credit</th>
+                                                <th>Balance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody">
+                                            <t t-set="initial_balance"
+                                               t-value="doc.get_initial_balance(account['account_id'][0], 'account')"/>
+                                            <t t-set="total_debit" t-value="0"/>
+                                            <t t-set="total_credit" t-value="0"/>
+                                            <t t-set="current_balance" t-value="0"/>
+                                            <tr t-if="initial_balance and doc.is_initial_balance"
+                                                style="border: 1px solid grey;">
+                                                <td colspan="6" style="border: 1px solid grey;"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span>Initial Balance</span>
+                                                </td>
+                                                <td colspan="2" style="border: 1px solid grey;"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="initial_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                </td>
+                                                <t t-set="current_balance"
+                                                   t-value="current_balance + initial_balance"/>
+                                            </tr>
+
+                                            <tr t-foreach="doc.account_move_line_ids.sorted(key=lambda x:x.date).filtered(lambda
+                                            line:  line.account_id.id == account['account_id'][0])"
+                                                t-as="move"
+                                                style="border: 1px solid grey;">
+                                                <t t-set="total_debit" t-value="total_debit + move.debit"/>
+                                                <t t-set="total_credit" t-value="total_credit + move.credit"/>
+                                                <t t-set="current_balance"
+                                                   t-value="current_balance + (move.debit - move.credit)"/>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.date"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.move_id.id"
+                                                            res-model="account.move"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.move_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.journal_id.id"
+                                                            res-model="account.journal"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.journal_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.account_id.id"
+                                                            res-model="account.account"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.account_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.partner_id.id"
+                                                            res-model="res.partner"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.partner_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="doc.get_ref_label(move.ref, move.name)"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span
+                                                            t-att-res-id="move.analytic_account_id.id"
+                                                            res-model="account.analytic.account"
+                                                            view-type="form"
+                                                    >
+                                                        <span t-field="move.analytic_account_id"/>
+                                                    </span>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.debit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-field="move.credit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="current_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': move.currency_id}"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="border: 1px solid grey;">
+                                                <td style="border: 1px solid grey;" colspan="7">
+                                                    Total:
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="total_debit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="total_credit"/>
+                                                </td>
+                                                <td style="border: 1px solid grey;">
+                                                    <span t-esc="current_balance"
+                                                          t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="partner_account_html_report"
+                string="Partner Account Report"
+                model="partner.account.report.wizard"
+                report_type="qweb-html"
+                file="account_partner_report.partner_account_report_template"
+                name="account_partner_report.partner_account_report_template"
+                print_report_name="'Partner Account Report'"
+        />
+        <report
+                id="partner_account_pdf_report"
+                string="Partner Account Report"
+                model="partner.account.report.wizard"
+                report_type="qweb-pdf"
+                file="account_partner_report.partner_account_report_template"
+                name="account_partner_report.partner_account_report_template"
+                print_report_name="'Partner Account Report'"
+        />
+    </data>
+</odoo>

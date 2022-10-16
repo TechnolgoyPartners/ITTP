@@ -25,7 +25,10 @@
             </xpath>
             <xpath expr="//button[@name='action_register_payment']" position="after">
                 <!-- Add your fields or attributes here -->
-                <button name="action_print_invoice_inherited" type="object" string="Print Invoice"/>
+                <button name="action_print_invoice_inherited"
+                        attrs="{'invisible': [('move_type','=','entry')]}"
+                        type="object"
+                        string="Print Invoice"/>
             </xpath>
 
 

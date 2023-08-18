@@ -24,6 +24,12 @@
                     <field name="shipping_note"/>
                 </xpath>
 
+                <xpath expr="//notebook" position="inside">
+                    <page string="Note">
+                        <field name="notes" placeholder="Description.."/>
+                    </page>
+                </xpath>
+
             </field>
         </record>
 

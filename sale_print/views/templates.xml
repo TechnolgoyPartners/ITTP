@@ -324,44 +324,44 @@
                                 </span>
                             </th>
                         </tr>
-<!--                        <tr style="border: 1px solid black;direction:ltr;font-size: 20px;">-->
-<!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
-<!--                                name="th_description" class="text-center">-->
-<!--                                <span>-->
-<!--                                    SN-->
-<!--                                </span>-->
-<!--                            </th>-->
-<!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
-<!--                                name="th_description" class="text-center">-->
-<!--                                <span>-->
-<!--                                    Product Number-->
-<!--                                </span>-->
-<!--                            </th>-->
-<!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
-<!--                                name="th_description" class="text-center">-->
-<!--                                <span>-->
-<!--                                    Product Name-->
-<!--                                </span>-->
-<!--                            </th>-->
-<!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
-<!--                                name="th_quantity" class="text-center">-->
-<!--                                <span>-->
-<!--                                    Qty-->
-<!--                                </span>-->
-<!--                            </th>-->
-<!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
-<!--                                name="th_priceunit" class="text-center">-->
-<!--                                <span>-->
-<!--                                    Unit price-->
-<!--                                </span>-->
-<!--                            </th>-->
-<!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
-<!--                                name="th_priceunit" class="text-center">-->
-<!--                                <span>-->
-<!--                                    subtotal-->
-<!--                                </span>-->
-<!--                            </th>-->
-<!--                        </tr>-->
+                        <!--                        <tr style="border: 1px solid black;direction:ltr;font-size: 20px;">-->
+                        <!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
+                        <!--                                name="th_description" class="text-center">-->
+                        <!--                                <span>-->
+                        <!--                                    SN-->
+                        <!--                                </span>-->
+                        <!--                            </th>-->
+                        <!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
+                        <!--                                name="th_description" class="text-center">-->
+                        <!--                                <span>-->
+                        <!--                                    Product Number-->
+                        <!--                                </span>-->
+                        <!--                            </th>-->
+                        <!--                            <th style="border: 1px solid black;text-align: center;line-height: 25px;background-color: #e9ecef;"-->
+                        <!--                                name="th_description" class="text-center">-->
+                        <!--                                <span>-->
+                        <!--                                    Product Name-->
+                        <!--                                </span>-->
+                        <!--                            </th>-->
+                        <!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
+                        <!--                                name="th_quantity" class="text-center">-->
+                        <!--                                <span>-->
+                        <!--                                    Qty-->
+                        <!--                                </span>-->
+                        <!--                            </th>-->
+                        <!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
+                        <!--                                name="th_priceunit" class="text-center">-->
+                        <!--                                <span>-->
+                        <!--                                    Unit price-->
+                        <!--                                </span>-->
+                        <!--                            </th>-->
+                        <!--                            <th style="border: 1px solid black;line-height: 25px;background-color: #e9ecef;"-->
+                        <!--                                name="th_priceunit" class="text-center">-->
+                        <!--                                <span>-->
+                        <!--                                    subtotal-->
+                        <!--                                </span>-->
+                        <!--                            </th>-->
+                        <!--                        </tr>-->
                     </thead>
                     <tbody style="border-collapse: collapse;direction:ltr;font-size: 15px;">
                         <t t-set="sr" t-value="0"/>
@@ -466,6 +466,10 @@
                             <span t-field="doc.shipping_term_custom_id.name"/>
                             :
                             <span t-field="doc.shipping_note"/>
+                        </t>
+                        <br/>
+                        <t t-if="doc.notes">
+                            <span t-field="doc.notes"/>
                         </t>
 
 

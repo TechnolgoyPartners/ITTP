@@ -10,9 +10,9 @@ class SaleOrderInheritCustom(models.Model):
         required=False)
 
     shipping_note = fields.Text(
-       string="Shipping Note",
-       required=False,
-       related='shipping_term_custom_id.shipping_note')
+        string="Shipping Note",
+        required=False,
+        related='shipping_term_custom_id.shipping_note')
 
     quotation_template_custom_id = fields.Many2one(
         comodel_name='quotation.template.custom',
@@ -24,4 +24,6 @@ class SaleOrderInheritCustom(models.Model):
         required=False,
         related='quotation_template_custom_id.note')
 
-
+    notes = fields.Text(
+        string="Notes",
+        required=False)

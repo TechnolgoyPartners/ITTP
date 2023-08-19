@@ -15,6 +15,6 @@ class ProductProduct(models.Model):
 
     barcode = fields.Char(string="Product Number", )
 
-    @api.constrains('barcode')
-    def _check_barcode_uniqueness(self):
-        pass
+    _sql_constraints = [
+        ('barcode_uniq', 'check(1=1)', ""),
+    ]
